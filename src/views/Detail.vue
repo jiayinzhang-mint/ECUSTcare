@@ -93,7 +93,7 @@ export default {
         return element.id == this.$route.params.id;
       });
       this.groupList = this.baseInfo.travelGroupList;
-      console.log(this.groupList);
+      // console.log(this.groupList);
       this.titleImg = "http://ghhd.ecnu.edu.cn" + this.baseInfo.imageUrl;
     }
   },
