@@ -8,7 +8,7 @@
               <v-layout row>
                 <v-flex xs8>
                   <div>
-                    <div class="headline font-weight-medium">{{userInfo.username}}</div>
+                    <div class="headline font-weight-medium text-uppercase">{{userInfo.username}}</div>
                   </div>
                 </v-flex>
                 <v-flex xs4>
