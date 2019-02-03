@@ -1,0 +1,31 @@
+.v-card {
+  border-radius: 7px
+}
+
+.fade-enter-active {
+  animation: fade 0.5s
+}
+
+.card-enter {
+  animation: card 0.4s
+}
+
+@keyframes fade {
+  from {
+    color: rgba(39, 39, 39, 0);
+  }
+  to {
+    color: rgb(32, 32, 32);
+  }
+}
+
+@keyframes card {
+  from {
+    opacity: 0;
+    transform: translateY(10px)
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0px)
+  }
+}
