@@ -20,6 +20,7 @@
         </v-flex>
         <v-flex xs12 class="mt-3">
           <v-btn round depressed block color="primary" dark @click="logOut">注销</v-btn>
+          <div class="text-xs-center mt-3 font-weight-medium">Powered By DIMLAB</div>
         </v-flex>
       </v-container>
     </transition>
