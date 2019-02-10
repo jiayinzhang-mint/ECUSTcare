@@ -2,57 +2,55 @@
   <v-container style="height:calc(100vh - 64px);overflow :auto">
     <transition appear appear-active-class="card-enter">
       <v-card flat class="transparent">
-        <v-container>
-          <h2 class="headline font-weight-medium">{{baseInfo.routeName}}</h2>
-          <h2
-            class="subheading font-weight-medium grey--text"
-          >{{baseInfo.publishTime | moment("YYYY-MM-DD")}}</h2>
-          <v-tabs v-model="tab" centered color="transparent">
-            <v-tabs-slider></v-tabs-slider>
-            <v-tab key="1">简介</v-tab>
-            <v-tab key="2">场次</v-tab>
-          </v-tabs>
-          <v-divider></v-divider>
-          <v-tabs-items v-model="tab" class="mt-3">
-            <v-tab-item key="1">
-              <div class="mt-5" v-html="routeInfo.activityContent"></div>
-            </v-tab-item>
-            <v-tab-item key="2">
-              <transition-group appear appear-active-class="card-enter">
-                <template v-for="(item,i) in groupList">
-                  <v-layout row :key="i" class="mb-3">
-                    <v-flex xs12>
-                      <v-card>
-                        <v-card-title>
-                          <div>
-                            <span class="subheading font-weight-medium">{{item.groupName}}</span>
-                            <br>
-                            <span
-                              class="grey--text"
-                            >{{item.startTime | moment("YYYY-MM-DD")}} 至 {{item.endTime | moment("YYYY-MM-DD")}}</span>
-                          </div>
-                          <v-spacer></v-spacer>
-                          <div>剩余 {{item.maxNumber-item.applicantNumber}}</div>
-                        </v-card-title>
-                        <v-card-actions>
-                          <v-btn
-                            v-if="item.maxNumber-item.applicantNumber>0"
-                            round
-                            flat
-                            color="primary"
-                            @click="enrollDialog=true;groupId=item.id"
-                          >报名</v-btn>
-                          <v-btn round flat disabled v-else>已满</v-btn>
-                          <v-btn round flat @click="enrollListDialog=true;groupId=item.id">已报名人员</v-btn>
-                        </v-card-actions>
-                      </v-card>
-                    </v-flex>
-                  </v-layout>
-                </template>
-              </transition-group>
-            </v-tab-item>
-          </v-tabs-items>
-        </v-container>
+        <h2 class="headline font-weight-medium">{{baseInfo.routeName}}</h2>
+        <h2
+          class="subheading font-weight-medium grey--text"
+        >{{baseInfo.publishTime | moment("YYYY-MM-DD")}}</h2>
+        <v-tabs v-model="tab" centered color="transparent">
+          <v-tabs-slider></v-tabs-slider>
+          <v-tab key="1">简介</v-tab>
+          <v-tab key="2">场次</v-tab>
+        </v-tabs>
+        <v-divider></v-divider>
+        <v-tabs-items v-model="tab" class="mt-3">
+          <v-tab-item key="1">
+            <div class="mt-5" v-html="routeInfo.activityContent"></div>
+          </v-tab-item>
+          <v-tab-item key="2">
+            <transition-group appear appear-active-class="card-enter">
+              <template v-for="(item,i) in groupList">
+                <v-layout row :key="i" class="mb-3">
+                  <v-flex xs12>
+                    <v-card>
+                      <v-card-title>
+                        <div>
+                          <span class="subheading font-weight-medium">{{item.groupName}}</span>
+                          <br>
+                          <span
+                            class="grey--text"
+                          >{{item.startTime | moment("YYYY-MM-DD")}} 至 {{item.endTime | moment("YYYY-MM-DD")}}</span>
+                        </div>
+                        <v-spacer></v-spacer>
+                        <div>剩余 {{item.maxNumber-item.applicantNumber}}</div>
+                      </v-card-title>
+                      <v-card-actions>
+                        <v-btn
+                          v-if="item.maxNumber-item.applicantNumber>0"
+                          round
+                          flat
+                          color="primary"
+                          @click="enrollDialog=true;groupId=item.id"
+                        >报名</v-btn>
+                        <v-btn round flat disabled v-else>已满</v-btn>
+                        <v-btn round flat @click="enrollListDialog=true;groupId=item.id">已报名人员</v-btn>
+                      </v-card-actions>
+                    </v-card>
+                  </v-flex>
+                </v-layout>
+              </template>
+            </transition-group>
+          </v-tab-item>
+        </v-tabs-items>
       </v-card>
     </transition>
 

@@ -1,15 +1,13 @@
 <template>
   <div>
-    <v-toolbar color="primary lighten-1" dark app fixed>
+    <v-toolbar app fixed>
       <v-toolbar-title class="pr-4">
         <span class="hidden-sm-and-down">疗休养</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-menu offset-y left>
-        <v-btn slot="activator" icon large>
-          <v-avatar size="32px" tile>
-            <img src="https://cdn.vuetifyjs.com/images/logos/logo.svg" alt="Vuetify">
-          </v-avatar>
+        <v-btn slot="activator" flat>
+          <v-avatar size="32px" tile>{{userInfo.username}}</v-avatar>
         </v-btn>
         <v-list>
           <v-list-tile v-for="(item, index) in userMenu" :key="index" :to="item.route">
@@ -41,6 +39,9 @@ export default {
         }
       ]
     };
+  },
+  computed: {
+    ...mapGetters(["userInfo"])
   }
 };
 </script>

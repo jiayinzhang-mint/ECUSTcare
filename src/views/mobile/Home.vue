@@ -7,6 +7,14 @@
         <v-icon>refresh</v-icon>
       </v-btn>
     </v-toolbar>
+    <v-card class="mb-3" color="primary" dark>
+      <v-card-title class="font-weight-medium">
+        已成功报名:
+        测试5日游
+        <v-spacer></v-spacer>
+        <v-btn flat round dark>查看详情</v-btn>
+      </v-card-title>
+    </v-card>
     <v-card class="mb-3">
       <v-card-title class="font-weight-medium">报名时间段
         <v-spacer></v-spacer>2019.1.2 - 2019.11.1

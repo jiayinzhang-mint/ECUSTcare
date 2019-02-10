@@ -9,16 +9,25 @@
             <v-icon>refresh</v-icon>
           </v-btn>
         </v-toolbar>
+        <v-card class="mb-3" color="primary lighten-1" dark>
+          <v-card-title class="font-weight-medium">
+            已成功报名:
+            测试5日游
+            <v-spacer></v-spacer>
+            <v-btn flat round dark>查看详情</v-btn>
+          </v-card-title>
+        </v-card>
         <v-card class="mb-3">
           <v-card-title class="font-weight-medium">报名时间段
             <v-spacer></v-spacer>2019.1.2 - 2019.11.1
           </v-card-title>
         </v-card>
+
         <transition-group appear appear-active-class="card-enter">
           <template v-for="(item,i) in routeList">
             <v-layout row :key="i" class="mb-3">
               <v-flex xs12>
-                <v-card :to="'/route/'+item.id" ripple>
+                <v-card ripple>
                   <v-img
                     class="white--text"
                     height="200px"
@@ -31,13 +40,22 @@
                       <br>
                       <span class="grey--text">于 {{item.publishTime | moment("YYYY-MM-DD")}} 发布</span>
                     </div>
+                    <v-spacer></v-spacer>
+                    <v-btn
+                      flat
+                      block
+                      round
+                      color="primary"
+                      :to="'/route/'+item.id"
+                      @click="selectCard"
+                    >查看详情</v-btn>
                   </v-card-title>
                 </v-card>
               </v-flex>
             </v-layout>
           </template>
         </transition-group>
-        
+
         <v-dialog v-model="loading" hide-overlay persistent width="300">
           <v-card color="primary" dark>
             <v-card-text>请稍后
@@ -48,7 +66,12 @@
       </v-container>
     </v-flex>
     <v-flex xs8 style="background-color:#f5f5f5">
-      <router-view></router-view>
+      <router-view v-if="$route.params.id"></router-view>
+      <v-container v-else fluid fill-height>
+        <v-layout align-center justify-center>
+          <div class="headline font-weight-light">请选择项目</div>
+        </v-layout>
+      </v-container>
     </v-flex>
   </v-layout>
 </template>
