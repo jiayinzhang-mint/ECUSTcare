@@ -41,14 +41,7 @@
                       <span class="grey--text">于 {{item.publishTime | moment("YYYY-MM-DD")}} 发布</span>
                     </div>
                     <v-spacer></v-spacer>
-                    <v-btn
-                      flat
-                      block
-                      round
-                      color="primary"
-                      :to="'/route/'+item.id"
-                      @click="selectCard"
-                    >查看详情</v-btn>
+                    <v-btn flat block round color="primary" :to="'/route/'+item.id">查看详情</v-btn>
                   </v-card-title>
                 </v-card>
               </v-flex>

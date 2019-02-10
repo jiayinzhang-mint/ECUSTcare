@@ -1,5 +1,5 @@
 import Vue from "vue";
-import Vuetify from "vuetify/lib";
+import Vuetify from "vuetify";
 import "../assets/style.css";
 import "vuetify/src/stylus/app.styl";
 import "../components/confirm-dialog/index";
