@@ -4,11 +4,11 @@
       <router-view @updatetab="updateTab()"></router-view>
     </v-content>
     <v-bottom-nav :active.sync="bottomNav" :value="true">
-      <v-btn color="primary" flat value="home" to="/home">
+      <v-btn color="primary" flat value="home" to="/mobile/home">
         <span>主页</span>
         <v-icon>home</v-icon>
       </v-btn>
-      <v-btn color="primary" flat value="user" to="/user">
+      <v-btn color="primary" flat value="user" to="/mobile/user">
         <span>用户</span>
         <v-icon>person</v-icon>
       </v-btn>

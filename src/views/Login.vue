@@ -24,6 +24,7 @@
                       label="密码"
                       type="password"
                       v-model="password"
+                      @keyup.enter="login"
                       :rules="[v => !!v || '请填写密码']"
                     ></v-text-field>
                   </v-form>
@@ -36,6 +37,13 @@
           </v-flex>
         </v-layout>
       </v-container>
+      <v-dialog v-model="loading" hide-overlay persistent width="300">
+        <v-card color="primary" dark>
+          <v-card-text>请稍后
+            <v-progress-linear indeterminate color="white" class="mb-0"></v-progress-linear>
+          </v-card-text>
+        </v-card>
+      </v-dialog>
     </v-content>
   </v-app>
 </template>
@@ -47,39 +55,74 @@ export default {
   data() {
     return {
       username: "",
-      password: ""
+      password: "",
+      loading: false
     };
   },
   methods: {
     ...mapMutations(["updateUserInfo"]),
     ...mapActions(["getRouteList"]),
-    login() {
+    detectDevice() {
+      const isMobile = {
+        Android: function() {
+          return navigator.userAgent.match(/Android/i) ? true : false;
+        },
+        BlackBerry: function() {
+          return navigator.userAgent.match(/BlackBerry/i) ? true : false;
+        },
+        iOS: function() {
+          return navigator.userAgent.match(/iPhone|iPad|iPod/i) ? true : false;
+        },
+        Windows: function() {
+          return navigator.userAgent.match(/IEMobile/i) ? true : false;
+        },
+        any: function() {
+          return (
+            isMobile.Android() ||
+            isMobile.BlackBerry() ||
+            isMobile.iOS() ||
+            isMobile.Windows()
+          );
+        }
+      };
+      if (isMobile.any()) {
+        const device = "mobile";
+        return device;
+      } else {
+        const device = "desktop";
+        return device;
+      }
+    },
+    async login() {
       if (this.$refs.loginForm.validate()) {
+        this.loading = true;
         let headers = new Headers({
           "Content-Type": "application/json;charset=utf-8"
         });
-        this.$ajax
-          .post(
-            "/login",
-            qs.stringify({
-              username: this.username,
-              password: this.password
-            }),
-            headers
-          )
-          .then(async data => {
-            data = data.data;
-            if (data.message == "登陆成功") {
-              await this.getRouteList({ year: 2019 });
-              this.$snackbar.show("success");
-              const userInfo = {};
-              userInfo.username = this.username;
-              this.updateUserInfo(userInfo);
-              this.$router.push({ path: "/home" });
-            } else {
-              this.$snackbar.show("fail");
-            }
-          });
+        var data = await this.$ajax.post(
+          "/login",
+          qs.stringify({
+            username: this.username,
+            password: this.password
+          }),
+          headers
+        );
+        data = data.data;
+        if (data.message == "登陆成功") {
+          await this.getRouteList({ year: 2019 });
+          this.loading = false;
+          this.$snackbar.show("success");
+          const userInfo = {};
+          userInfo.username = this.username;
+          this.updateUserInfo(userInfo);
+          if (this.detectDevice() == "mobile") {
+            this.$router.push({ path: "/mobile/home" });
+          } else {
+            this.$router.push({ path: "/home" });
+          }
+        } else {
+          this.$snackbar.show("fail");
+        }
       }
     }
   },

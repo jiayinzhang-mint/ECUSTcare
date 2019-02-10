@@ -10,20 +10,40 @@ export default new Router({
       component: () => import("./views/Login")
     },
     {
+      path: "/mobile/index",
+      component: () => import("./views/mobile/Index"),
+      children: [
+        {
+          path: "/mobile/home",
+          component: () => import("./views/mobile/Home")
+        },
+        {
+          path: "/mobile/user",
+          component: () => import("./views/mobile/User")
+        },
+        {
+          path: "/mobile/route/:id",
+          component: () => import("./views/mobile/Detail")
+        }
+      ]
+    },
+    {
       path: "/index",
-      component: () => import("./views/Index"),
+      component: () => import("./views/desktop/Index"),
       children: [
         {
           path: "/home",
-          component: () => import("./views/Home")
+          component: () => import("./views/desktop/Home"),
+          children: [
+            {
+              path: "/route/:id",
+              component: () => import("./views/desktop/Detail")
+            }
+          ]
         },
         {
           path: "/user",
-          component: () => import("./views/User")
-        },
-        {
-          path: "/route/:id",
-          component: () => import("./views/Detail")
+          component: () => import("./views/desktop/User")
         }
       ]
     }

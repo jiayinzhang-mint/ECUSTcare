@@ -16,7 +16,7 @@
       <template v-for="(item,i) in routeList">
         <v-layout row :key="i" class="mb-3">
           <v-flex xs12>
-            <v-card :to="'/route/'+item.id" ripple>
+            <v-card :to="'/mobile/route/'+item.id" ripple>
               <v-img
                 class="white--text"
                 height="200px"

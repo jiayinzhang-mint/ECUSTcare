@@ -1,19 +1,5 @@
 <template>
-  <v-content style="height:calc(100vh - 56px);overflow :auto">
-    <v-img :src="titleImg" aspect-ratio="1.7" v-if="baseInfo.imageUrl">
-      <v-toolbar flat class="transparent">
-        <v-spacer></v-spacer>
-        <v-btn round color="white" class="mt-5" icon @click="close">
-          <v-icon>close</v-icon>
-        </v-btn>
-      </v-toolbar>
-    </v-img>
-    <v-toolbar v-else flat class="transparent">
-      <v-spacer></v-spacer>
-      <v-btn round color="white" class="mt-5" icon @click="close">
-        <v-icon>close</v-icon>
-      </v-btn>
-    </v-toolbar>
+  <v-container style="height:calc(100vh - 64px);overflow :auto">
     <transition appear appear-active-class="card-enter">
       <v-card flat class="transparent">
         <v-container>
@@ -70,7 +56,7 @@
       </v-card>
     </transition>
 
-    <v-dialog v-model="enrollDialog" scrollable>
+    <v-dialog v-model="enrollDialog" scrollable max-width="600px">
       <v-card>
         <v-card-title class="subheading">报名须知
           <v-spacer></v-spacer>
@@ -106,7 +92,7 @@
       </v-card>
     </v-dialog>
 
-    <v-dialog v-model="enrollListDialog" scrollable>
+    <v-dialog v-model="enrollListDialog" scrollable max-width="600px">
       <v-card>
         <v-card-title class="subheading">已报名人员
           <v-spacer></v-spacer>
@@ -132,7 +118,7 @@
         </v-list>
       </v-card>
     </v-dialog>
-  </v-content>
+  </v-container>
 </template>
 <script>
 import { mapGetters } from "vuex";
@@ -162,7 +148,7 @@ export default {
         });
     },
     close() {
-      this.$router.push({ path: "/home" });
+      this.$router.push({ path: "/mobile/home" });
     },
     getBaseInfo() {
       this.baseInfo = this.routeList.find(element => {
