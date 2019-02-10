@@ -72,7 +72,12 @@
 
     <v-dialog v-model="enrollDialog" scrollable>
       <v-card>
-        <v-card-title class="subheading">报名须知</v-card-title>
+        <v-card-title class="subheading">报名须知
+          <v-spacer></v-spacer>
+          <v-btn icon @click="enrollDialog=false">
+            <v-icon>clear</v-icon>
+          </v-btn>
+        </v-card-title>
         <v-divider></v-divider>
         <v-card-text
           style="height: 300px;"
@@ -103,7 +108,12 @@
 
     <v-dialog v-model="enrollListDialog" scrollable>
       <v-card>
-        <v-card-title class="subheading">已报名人员</v-card-title>
+        <v-card-title class="subheading">已报名人员
+          <v-spacer></v-spacer>
+          <v-btn icon @click="enrollListDialog=false">
+            <v-icon>clear</v-icon>
+          </v-btn>
+        </v-card-title>
         <v-divider></v-divider>
         <v-list two-line>
           <div v-for="(item,i) in enrollList" :key="i">
