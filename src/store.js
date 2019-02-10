@@ -29,14 +29,11 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    getRouteList(context, params) {
-      return new Promise((resolve, reject) => {
-        axios.get("/api/travel/" + params.year).then(data => {
-          data = data.data;
-          const routeList = data.routeList;
-          context.commit("getRouteList", routeList);
-          resolve();
-        });
+    async getRouteList(context, params) {
+      await axios.get("/api/travel/" + params.year).then(data => {
+        data = data.data;
+        const routeList = data.routeList;
+        context.commit("getRouteList", routeList);
       });
     }
   },

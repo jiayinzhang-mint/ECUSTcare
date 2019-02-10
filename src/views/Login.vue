@@ -42,6 +42,7 @@
 
 <script>
 import { mapMutations, mapActions } from "vuex";
+import qs from "qs";
 export default {
   data() {
     return {
@@ -54,11 +55,18 @@ export default {
     ...mapActions(["getRouteList"]),
     login() {
       if (this.$refs.loginForm.validate()) {
+        let headers = new Headers({
+          "Content-Type": "application/json;charset=utf-8"
+        });
         this.$ajax
-          .post("/login", {
-            username: this.username,
-            password: this.password
-          })
+          .post(
+            "/login",
+            qs.stringify({
+              username: this.username,
+              password: this.password
+            }),
+            headers
+          )
           .then(async data => {
             data = data.data;
             if (data.message == "登陆成功") {

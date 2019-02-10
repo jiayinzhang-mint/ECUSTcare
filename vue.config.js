@@ -22,7 +22,7 @@ module.exports = {
   devServer: {
     proxy: {
       "/": {
-        target: "http://ghhd.ecnu.edu.cn/",
+        target: "http://demo.chassstep.com/",
         ws: false
       }
     }
