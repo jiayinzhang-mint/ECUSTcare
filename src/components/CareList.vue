@@ -38,7 +38,7 @@
           <v-card-title class="font-weight-medium">当前状态：可报名</v-card-title>
         </v-card>
 
-        <h2 class="mb-3 mt-5 subheading font-weight-medium">疗养项目</h2>
+        <h2 class="mb-3 mt-5 subheading font-weight-medium">疗养线路</h2>
         <v-card class="mb-3">
           <v-card-title class="font-weight-medium">报名时间段
             <v-spacer></v-spacer>2019.1.2 00:00 - 2019.11.1 00:00
@@ -94,10 +94,10 @@
       </v-container>
     </v-flex>
     <v-flex class="hidden-sm-and-down" sm8 style="background-color:#f5f5f5">
-      <router-view v-if="$route.params.id"></router-view>
+      <router-view @enroll="updateCurrentGroup" v-if="$route.params.id"></router-view>
       <v-container v-else fluid fill-height>
         <v-layout align-center justify-center>
-          <div class="headline font-weight-light">请选择项目</div>
+          <div class="headline font-weight-light">请选择线路</div>
         </v-layout>
       </v-container>
     </v-flex>

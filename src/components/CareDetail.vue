@@ -10,7 +10,7 @@
           <v-spacer></v-spacer>
           <h2 class="font-weight-medium">¥ {{baseInfo.routePrice}}</h2>
         </v-toolbar>
-        <v-tabs v-model="tab" centered color="transparent">
+        <v-tabs v-model="tab" centered color="transparent" slider-color="yellow">
           <v-tabs-slider></v-tabs-slider>
           <v-tab key="1">简介</v-tab>
           <v-tab key="2">疗养团</v-tab>
@@ -50,7 +50,7 @@
                             round
                             flat
                             color="primary"
-                            @click="enrollDialog=true;groupId=item.id"
+                            @click="enrollDialog=true;groupId=item.id;stopBodyScroll(true)"
                           >报名</v-btn>
                           <v-btn
                             @click="cancel"
@@ -86,7 +86,7 @@
       <v-card v-if="enrollProgress==0">
         <v-card-title class="subheading font-weight-bold">报名须知
           <v-spacer></v-spacer>
-          <v-btn icon @click="enrollDialog=false;enrollProgress=0">
+          <v-btn icon @click="enrollDialog=false;enrollProgress=0;stopBodyScroll()">
             <v-icon>clear</v-icon>
           </v-btn>
         </v-card-title>
@@ -112,7 +112,7 @@
       <v-card v-if="enrollProgress==1">
         <v-card-title class="subheading font-weight-bold">信息确认
           <v-spacer></v-spacer>
-          <v-btn icon @click="enrollDialog=false;enrollProgress=0">
+          <v-btn icon @click="enrollDialog=false;enrollProgress=0;stopBodyScroll()">
             <v-icon>clear</v-icon>
           </v-btn>
         </v-card-title>
@@ -143,7 +143,7 @@
       <v-card v-if="enrollProgress==2">
         <v-card-title class="subheading font-weight-bold">信息补全
           <v-spacer></v-spacer>
-          <v-btn icon @click="enrollDialog=false;enrollProgress=0">
+          <v-btn icon @click="enrollDialog=false;enrollProgress=0;stopBodyScroll()">
             <v-icon>clear</v-icon>
           </v-btn>
         </v-card-title>
@@ -180,7 +180,7 @@
             round
             color="primary"
             v-if="agree"
-            @click="enrollProgress=0;agree=false;enroll(groupId);enrollDialog=false"
+            @click="enrollProgress=0;agree=false;enroll(groupId);enrollDialog=false;stopBodyScroll()"
           >确认报名</v-btn>
         </v-card-actions>
       </v-card>
@@ -253,10 +253,26 @@ export default {
       // console.log(this.groupList);
       this.titleImg = "http://demo.chassstep.com" + this.baseInfo.imageUrl;
     },
+    stopBodyScroll(isFixed) {
+      let bodyEl = document.body;
+      let top = 0;
+      if (isFixed) {
+        top = window.scrollY;
+
+        bodyEl.style.position = "fixed";
+        bodyEl.style.top = -top + "px";
+      } else {
+        bodyEl.style.position = "";
+        bodyEl.style.top = "";
+
+        window.scrollTo(0, top); // 回到原先的top
+      }
+    },
     async enroll(groupId) {
       await careService.enroll(this.$route.params.id, groupId);
       this.getRouteInfo();
       this.getBaseInfo();
+      this.$emit("enroll");
     },
     async cancel() {
       try {
