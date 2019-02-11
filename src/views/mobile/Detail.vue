@@ -1,6 +1,10 @@
 <template>
   <v-content style="height:calc(100vh - 56px);overflow :auto">
-    <v-img :src="titleImg" aspect-ratio="1.7" v-if="baseInfo.imageUrl">
+    <v-img
+      src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1549824939310&di=ce3363d93c5aeffe60e415593afacf1e&imgtype=jpg&src=http%3A%2F%2Fimg4.imgtn.bdimg.com%2Fit%2Fu%3D4256572454%2C870597285%26fm%3D214%26gp%3D0.jpg"
+      aspect-ratio="1.7"
+      v-if="baseInfo.imageUrl"
+    >
       <v-toolbar flat class="transparent">
         <v-spacer></v-spacer>
         <v-btn round color="white" class="mt-5" icon @click="close">
@@ -72,7 +76,7 @@
 
     <v-dialog v-model="enrollDialog" scrollable>
       <v-card>
-        <v-card-title class="subheading">报名须知
+        <v-card-title class="subheading font-weight-bold">报名须知
           <v-spacer></v-spacer>
           <v-btn icon @click="enrollDialog=false">
             <v-icon>clear</v-icon>
@@ -97,7 +101,93 @@
                   round
                   color="primary"
                   v-if="agree"
-                  @click="enroll(groupId);enrollDialog=false"
+                  @click="enrollDialog=false;enrollDialogSure=true"
+                >下一步：确认信息</v-btn>
+              </v-flex>
+            </v-layout>
+          </v-container>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+
+    <v-dialog v-model="enrollDialogSure" scrollable persistent>
+      <v-card>
+        <v-card-title class="subheading font-weight-bold">确认信息</v-card-title>
+        <v-divider></v-divider>
+        <v-card-text>
+          <v-form class="body-1">
+            <v-text-field label="姓名" disabled></v-text-field>
+            <v-text-field label="身份证号码" disabled></v-text-field>
+            <v-text-field label="性别" disabled></v-text-field>
+            <v-text-field label="手机号码" disabled></v-text-field>
+            <v-text-field label="工作单位" disabled></v-text-field>
+          </v-form>
+        </v-card-text>
+        <v-card-actions>
+          <v-container>
+            <v-layout class="mb-2">
+              <v-flex xs12>
+                <v-btn block depressed round @click="enrollDialogSure=false">取消</v-btn>
+              </v-flex>
+            </v-layout>
+            <v-layout justify-center>
+              <v-flex xs12>
+                <v-btn
+                  block
+                  depressed
+                  round
+                  color="primary"
+                  v-if="agree"
+                  @click="enrollDialogSure=false;enrollDialogAdd=true"
+                >下一步：填写附加信息</v-btn>
+              </v-flex>
+            </v-layout>
+          </v-container>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+
+    <v-dialog v-model="enrollDialogAdd" scrollable persistent>
+      <v-card>
+        <v-card-title class="subheading font-weight-bold">附加信息</v-card-title>
+        <v-divider></v-divider>
+        <v-card-text>
+          <v-form class="body-1">
+            <v-radio-group row label="身体状况">
+              <v-radio label="健康" value="2"></v-radio>
+              <v-radio label="一般" value="1"></v-radio>
+              <v-radio label="较弱" value="0"></v-radio>
+            </v-radio-group>
+            <v-text-field label="紧急联系人" disabled></v-text-field>
+            <v-text-field label="家庭电话" disabled></v-text-field>
+            <v-text-field label="职称" disabled></v-text-field>
+            <v-text-field label="职务" disabled></v-text-field>
+            <v-radio-group row label="是否愿意调剂">
+              <v-radio label="是" value="2"></v-radio>
+              <v-radio label="否" value="1"></v-radio>
+            </v-radio-group>
+            <v-radio-group row label="出发校区">
+              <v-radio label="闵行" value="2"></v-radio>
+              <v-radio label="中北" value="1"></v-radio>
+            </v-radio-group>
+          </v-form>
+        </v-card-text>
+        <v-card-actions>
+          <v-container>
+            <v-layout class="mb-2">
+              <v-flex xs12>
+                <v-btn block depressed round @click="enrollDialogAdd=false">取消</v-btn>
+              </v-flex>
+            </v-layout>
+            <v-layout justify-center>
+              <v-flex xs12>
+                <v-btn
+                  block
+                  depressed
+                  round
+                  color="primary"
+                  v-if="agree"
+                  @click="enroll(groupId);enrollDialogAdd=false"
                 >确认报名</v-btn>
               </v-flex>
             </v-layout>
@@ -108,7 +198,7 @@
 
     <v-dialog v-model="enrollListDialog" scrollable>
       <v-card>
-        <v-card-title class="subheading">已报名人员
+        <v-card-title class="subheading font-weight-bold">已报名人员
           <v-spacer></v-spacer>
           <v-btn icon @click="enrollListDialog=false">
             <v-icon>clear</v-icon>
@@ -147,6 +237,8 @@ export default {
       titleImg: "",
       tab: null,
       enrollDialog: false,
+      enrollDialogSure: false,
+      enrollDialogAdd: false,
       enrollListDialog: false,
       agree: false,
       groupId: null

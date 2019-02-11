@@ -28,7 +28,46 @@
               <v-img
                 class="white--text"
                 height="200px"
-                :src="'http://demo.chassstep.com'+item.imageUrl"
+                src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1549824939310&di=ce3363d93c5aeffe60e415593afacf1e&imgtype=jpg&src=http%3A%2F%2Fimg4.imgtn.bdimg.com%2Fit%2Fu%3D4256572454%2C870597285%26fm%3D214%26gp%3D0.jpg"
+                v-if="item.imageUrl"
+              ></v-img>
+              <v-card-title>
+                <div>
+                  <span class="subheading font-weight-medium">{{item.routeName}}</span>
+                  <br>
+                  <span class="grey--text">于 {{item.publishTime | moment("YYYY-MM-DD")}} 发布</span>
+                </div>
+              </v-card-title>
+            </v-card>
+          </v-flex>
+        </v-layout>
+        <v-layout row :key="i" class="mb-3">
+          <v-flex xs12>
+            <v-card :to="'/mobile/route/'+item.id" ripple>
+              <v-img
+                class="white--text"
+                height="200px"
+                src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1549824939310&di=ce3363d93c5aeffe60e415593afacf1e&imgtype=jpg&src=http%3A%2F%2Fimg4.imgtn.bdimg.com%2Fit%2Fu%3D4256572454%2C870597285%26fm%3D214%26gp%3D0.jpg"
+                v-if="item.imageUrl"
+              ></v-img>
+              <v-card-title>
+                <div>
+                  <span class="subheading font-weight-medium">{{item.routeName}}</span>
+                  <br>
+                  <span class="grey--text">于 {{item.publishTime | moment("YYYY-MM-DD")}} 发布</span>
+                </div>
+              </v-card-title>
+            </v-card>
+          </v-flex>
+        </v-layout>
+
+        <v-layout row :key="i" class="mb-3">
+          <v-flex xs12>
+            <v-card :to="'/mobile/route/'+item.id" ripple>
+              <v-img
+                class="white--text"
+                height="200px"
+                src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1549824939310&di=ce3363d93c5aeffe60e415593afacf1e&imgtype=jpg&src=http%3A%2F%2Fimg4.imgtn.bdimg.com%2Fit%2Fu%3D4256572454%2C870597285%26fm%3D214%26gp%3D0.jpg"
                 v-if="item.imageUrl"
               ></v-img>
               <v-card-title>

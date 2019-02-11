@@ -3,23 +3,25 @@
     <v-flex xs4 style="height:calc(100vh - 64px);overflow :auto">
       <v-container>
         <v-toolbar class="transparent" flat>
-          <h1 class="mb-3 mt-1 display-1 font-weight-medium" style="margin-left:-16px">{{year}}</h1>
+          <h1 class="mb-3 mt-1 headline font-weight-medium" style="margin-left:-16px">{{year}} 疗养活动</h1>
           <v-spacer></v-spacer>
-          <v-btn icon flat @click="refresh" style="margin-right:-16px">
+          <v-btn icon flat class="mb-3" @click="refresh" style="margin-right:-16px">
             <v-icon>refresh</v-icon>
           </v-btn>
         </v-toolbar>
         <v-card class="mb-3" color="primary lighten-1" dark>
-          <v-card-title class="font-weight-medium">
-            已成功报名:
-            测试5日游
+          <v-card-title class="font-weight-medium">测试5日游 - 测试1团
             <v-spacer></v-spacer>
-            <v-btn flat round dark>查看详情</v-btn>
+            <v-btn flat round dark small>取消报名</v-btn>
+            <v-btn flat round dark small>查看详情</v-btn>
           </v-card-title>
         </v-card>
         <v-card class="mb-3">
           <v-card-title class="font-weight-medium">报名时间段
-            <v-spacer></v-spacer>2019.1.2 - 2019.11.1
+            <v-spacer></v-spacer>2019.1.2 00:00 - 2019.11.1 00:00
+          </v-card-title>
+          <v-card-title class="font-weight-medium">剩余时间
+            <v-spacer></v-spacer>240天 00:00:00
           </v-card-title>
         </v-card>
 
@@ -31,7 +33,28 @@
                   <v-img
                     class="white--text"
                     height="200px"
-                    :src="'http://demo.chassstep.com'+item.imageUrl"
+                    src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1549824939310&di=ce3363d93c5aeffe60e415593afacf1e&imgtype=jpg&src=http%3A%2F%2Fimg4.imgtn.bdimg.com%2Fit%2Fu%3D4256572454%2C870597285%26fm%3D214%26gp%3D0.jpg"
+                    v-if="item.imageUrl"
+                  ></v-img>
+                  <v-card-title>
+                    <div>
+                      <span class="subheading font-weight-medium">{{item.routeName}}</span>
+                      <br>
+                      <span class="grey--text">¥ {{item.routePrice}}</span>
+                    </div>
+                    <v-spacer></v-spacer>
+                    <v-btn flat block round color="primary" :to="'/route/'+item.id">查看详情</v-btn>
+                  </v-card-title>
+                </v-card>
+              </v-flex>
+            </v-layout>
+            <v-layout row :key="i" class="mb-3">
+              <v-flex xs12>
+                <v-card ripple>
+                  <v-img
+                    class="white--text"
+                    height="200px"
+                    src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1549824939310&di=ce3363d93c5aeffe60e415593afacf1e&imgtype=jpg&src=http%3A%2F%2Fimg4.imgtn.bdimg.com%2Fit%2Fu%3D4256572454%2C870597285%26fm%3D214%26gp%3D0.jpg"
                     v-if="item.imageUrl"
                   ></v-img>
                   <v-card-title>
@@ -41,7 +64,70 @@
                       <span class="grey--text">于 {{item.publishTime | moment("YYYY-MM-DD")}} 发布</span>
                     </div>
                     <v-spacer></v-spacer>
-                    <v-btn flat block round color="primary" :to="'/route/'+item.id">查看详情</v-btn>
+                    <v-btn flat block round color="primary">查看详情</v-btn>
+                  </v-card-title>
+                </v-card>
+              </v-flex>
+            </v-layout>
+            <v-layout row :key="i" class="mb-3">
+              <v-flex xs12>
+                <v-card ripple>
+                  <v-img
+                    class="white--text"
+                    height="200px"
+                    src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1549824939310&di=ce3363d93c5aeffe60e415593afacf1e&imgtype=jpg&src=http%3A%2F%2Fimg4.imgtn.bdimg.com%2Fit%2Fu%3D4256572454%2C870597285%26fm%3D214%26gp%3D0.jpg"
+                    v-if="item.imageUrl"
+                  ></v-img>
+                  <v-card-title>
+                    <div>
+                      <span class="subheading font-weight-medium">{{item.routeName}}</span>
+                      <br>
+                      <span class="grey--text">于 {{item.publishTime | moment("YYYY-MM-DD")}} 发布</span>
+                    </div>
+                    <v-spacer></v-spacer>
+                    <v-btn flat block round color="primary">查看详情</v-btn>
+                  </v-card-title>
+                </v-card>
+              </v-flex>
+            </v-layout>
+            <v-layout row :key="i" class="mb-3">
+              <v-flex xs12>
+                <v-card ripple>
+                  <v-img
+                    class="white--text"
+                    height="200px"
+                    src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1549824939310&di=ce3363d93c5aeffe60e415593afacf1e&imgtype=jpg&src=http%3A%2F%2Fimg4.imgtn.bdimg.com%2Fit%2Fu%3D4256572454%2C870597285%26fm%3D214%26gp%3D0.jpg"
+                    v-if="item.imageUrl"
+                  ></v-img>
+                  <v-card-title>
+                    <div>
+                      <span class="subheading font-weight-medium">{{item.routeName}}</span>
+                      <br>
+                      <span class="grey--text">于 {{item.publishTime | moment("YYYY-MM-DD")}} 发布</span>
+                    </div>
+                    <v-spacer></v-spacer>
+                    <v-btn flat block round color="primary">查看详情</v-btn>
+                  </v-card-title>
+                </v-card>
+              </v-flex>
+            </v-layout>
+            <v-layout row :key="i" class="mb-3">
+              <v-flex xs12>
+                <v-card ripple>
+                  <v-img
+                    class="white--text"
+                    height="200px"
+                    src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1549824939310&di=ce3363d93c5aeffe60e415593afacf1e&imgtype=jpg&src=http%3A%2F%2Fimg4.imgtn.bdimg.com%2Fit%2Fu%3D4256572454%2C870597285%26fm%3D214%26gp%3D0.jpg"
+                    v-if="item.imageUrl"
+                  ></v-img>
+                  <v-card-title>
+                    <div>
+                      <span class="subheading font-weight-medium">{{item.routeName}}</span>
+                      <br>
+                      <span class="grey--text">于 {{item.publishTime | moment("YYYY-MM-DD")}} 发布</span>
+                    </div>
+                    <v-spacer></v-spacer>
+                    <v-btn flat block round color="primary">查看详情</v-btn>
                   </v-card-title>
                 </v-card>
               </v-flex>

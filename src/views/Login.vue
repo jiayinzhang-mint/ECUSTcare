@@ -49,7 +49,9 @@
 </template>
 
 <script>
-import { mapMutations, mapActions } from "vuex";
+import authService from "../service/AuthService";
+import careService from "../service/CareService";
+
 import qs from "qs";
 export default {
   data() {
@@ -60,68 +62,20 @@ export default {
     };
   },
   methods: {
-    ...mapMutations(["updateUserInfo"]),
-    ...mapActions(["getRouteList"]),
-    detectDevice() {
-      const isMobile = {
-        Android: function() {
-          return navigator.userAgent.match(/Android/i) ? true : false;
-        },
-        BlackBerry: function() {
-          return navigator.userAgent.match(/BlackBerry/i) ? true : false;
-        },
-        iOS: function() {
-          return navigator.userAgent.match(/iPhone|iPad|iPod/i) ? true : false;
-        },
-        Windows: function() {
-          return navigator.userAgent.match(/IEMobile/i) ? true : false;
-        },
-        any: function() {
-          return (
-            isMobile.Android() ||
-            isMobile.BlackBerry() ||
-            isMobile.iOS() ||
-            isMobile.Windows()
-          );
-        }
-      };
-      if (isMobile.any()) {
-        const device = "mobile";
-        return device;
-      } else {
-        const device = "desktop";
-        return device;
-      }
-    },
     async login() {
       if (this.$refs.loginForm.validate()) {
         this.loading = true;
-        let headers = new Headers({
-          "Content-Type": "application/json;charset=utf-8"
-        });
-        var data = await this.$ajax.post(
-          "/login",
-          qs.stringify({
-            username: this.username,
-            password: this.password
-          }),
-          headers
-        );
-        data = data.data;
-        if (data.message == "登陆成功") {
-          await this.getRouteList({ year: 2019 });
+        try {
+          var data = await authService.login(this.username, this.password);
+          await careService.getRouteList(2019);
           this.loading = false;
-          this.$snackbar.show("success");
-          const userInfo = {};
-          userInfo.username = this.username;
-          this.updateUserInfo(userInfo);
-          if (this.detectDevice() == "mobile") {
+          if (data.device == "mobile") {
             this.$router.push({ path: "/mobile/home" });
           } else {
             this.$router.push({ path: "/home" });
           }
-        } else {
-          this.$snackbar.show("fail");
+        } catch (err) {
+          err;
         }
       }
     }

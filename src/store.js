@@ -29,12 +29,8 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    async getRouteList(context, params) {
-      await axios.get("/api/travel/" + params.year).then(data => {
-        data = data.data;
-        const routeList = data.routeList;
-        context.commit("getRouteList", routeList);
-      });
+    async getRouteList(context, routeList) {
+      context.commit("getRouteList", routeList);
     }
   },
   plugins: [vuexAlong]
