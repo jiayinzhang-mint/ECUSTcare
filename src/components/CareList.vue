@@ -9,11 +9,27 @@
             <v-icon>refresh</v-icon>
           </v-btn>
         </v-toolbar>
-        <h2 class="mb-3 mt-1 subheading font-weight-medium">已报名</h2>
-        <v-card class="mb-3" color="primary lighten-1" dark>
-          <v-card-title class="font-weight-medium">测试5日游 - 测试1团
+        <h2 class="mb-3 mt-1 subheading font-weight-medium" v-if="enrollInfo.groupId">已报名</h2>
+        <v-card
+          class="mb-3"
+          color="primary lighten-1"
+          dark
+          v-if="enrollInfo.groupId"
+          :to="userInfo.device=='desktop'?'/route/'+currentRoute.id:'/mobile/route/'+currentRoute.id"
+        >
+          <v-card-title class="font-weight-medium">
+            {{currentRoute.routeName}} - {{currentGroup.groupName}}
             <v-spacer></v-spacer>
-            <v-btn flat round dark small>查看详情</v-btn>
+            <v-btn
+              flat
+              round
+              dark
+              small
+              icon
+              :to="userInfo.device=='desktop'?'/route/'+currentRoute.id:'/mobile/route/'+currentRoute.id"
+            >
+              <v-icon>info</v-icon>
+            </v-btn>
           </v-card-title>
         </v-card>
 
@@ -30,7 +46,10 @@
           <template v-for="(item,i) in routeList">
             <v-layout row :key="i" class="mb-3">
               <v-flex xs12>
-                <v-card ripple>
+                <v-card
+                  ripple
+                  :to="userInfo.device=='desktop'?'/route/'+item.id:'/mobile/route/'+item.id"
+                >
                   <v-img
                     class="white--text"
                     height="200px"
@@ -41,7 +60,9 @@
                     <div>
                       <span class="subheading font-weight-medium">{{item.routeName}}</span>
                       <br>
-                      <span class="grey--text">¥ {{item.routePrice}}</span>
+                      <span
+                        class="body-2 grey--text"
+                      >¥ {{item.routePrice}} &nbsp;{{item.travelGroupList.length}}个疗养团</span>
                     </div>
                     <v-spacer></v-spacer>
                     <v-btn
@@ -51,90 +72,6 @@
                       color="primary"
                       :to="userInfo.device=='desktop'?'/route/'+item.id:'/mobile/route/'+item.id"
                     >查看详情</v-btn>
-                  </v-card-title>
-                </v-card>
-              </v-flex>
-            </v-layout>
-            <v-layout row :key="i" class="mb-3">
-              <v-flex xs12>
-                <v-card ripple>
-                  <v-img
-                    class="white--text"
-                    height="200px"
-                    src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1549824939310&di=ce3363d93c5aeffe60e415593afacf1e&imgtype=jpg&src=http%3A%2F%2Fimg4.imgtn.bdimg.com%2Fit%2Fu%3D4256572454%2C870597285%26fm%3D214%26gp%3D0.jpg"
-                    v-if="item.imageUrl"
-                  ></v-img>
-                  <v-card-title>
-                    <div>
-                      <span class="subheading font-weight-medium">{{item.routeName}}</span>
-                      <br>
-                      <span class="grey--text">于 {{item.publishTime | moment("YYYY-MM-DD")}} 发布</span>
-                    </div>
-                    <v-spacer></v-spacer>
-                    <v-btn flat block round color="primary">查看详情</v-btn>
-                  </v-card-title>
-                </v-card>
-              </v-flex>
-            </v-layout>
-            <v-layout row :key="i" class="mb-3">
-              <v-flex xs12>
-                <v-card ripple>
-                  <v-img
-                    class="white--text"
-                    height="200px"
-                    src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1549824939310&di=ce3363d93c5aeffe60e415593afacf1e&imgtype=jpg&src=http%3A%2F%2Fimg4.imgtn.bdimg.com%2Fit%2Fu%3D4256572454%2C870597285%26fm%3D214%26gp%3D0.jpg"
-                    v-if="item.imageUrl"
-                  ></v-img>
-                  <v-card-title>
-                    <div>
-                      <span class="subheading font-weight-medium">{{item.routeName}}</span>
-                      <br>
-                      <span class="grey--text">于 {{item.publishTime | moment("YYYY-MM-DD")}} 发布</span>
-                    </div>
-                    <v-spacer></v-spacer>
-                    <v-btn flat block round color="primary">查看详情</v-btn>
-                  </v-card-title>
-                </v-card>
-              </v-flex>
-            </v-layout>
-            <v-layout row :key="i" class="mb-3">
-              <v-flex xs12>
-                <v-card ripple>
-                  <v-img
-                    class="white--text"
-                    height="200px"
-                    src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1549824939310&di=ce3363d93c5aeffe60e415593afacf1e&imgtype=jpg&src=http%3A%2F%2Fimg4.imgtn.bdimg.com%2Fit%2Fu%3D4256572454%2C870597285%26fm%3D214%26gp%3D0.jpg"
-                    v-if="item.imageUrl"
-                  ></v-img>
-                  <v-card-title>
-                    <div>
-                      <span class="subheading font-weight-medium">{{item.routeName}}</span>
-                      <br>
-                      <span class="grey--text">于 {{item.publishTime | moment("YYYY-MM-DD")}} 发布</span>
-                    </div>
-                    <v-spacer></v-spacer>
-                    <v-btn flat block round color="primary">查看详情</v-btn>
-                  </v-card-title>
-                </v-card>
-              </v-flex>
-            </v-layout>
-            <v-layout row :key="i" class="mb-3">
-              <v-flex xs12>
-                <v-card ripple>
-                  <v-img
-                    class="white--text"
-                    height="200px"
-                    src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1549824939310&di=ce3363d93c5aeffe60e415593afacf1e&imgtype=jpg&src=http%3A%2F%2Fimg4.imgtn.bdimg.com%2Fit%2Fu%3D4256572454%2C870597285%26fm%3D214%26gp%3D0.jpg"
-                    v-if="item.imageUrl"
-                  ></v-img>
-                  <v-card-title>
-                    <div>
-                      <span class="subheading font-weight-medium">{{item.routeName}}</span>
-                      <br>
-                      <span class="grey--text">于 {{item.publishTime | moment("YYYY-MM-DD")}} 发布</span>
-                    </div>
-                    <v-spacer></v-spacer>
-                    <v-btn flat block round color="primary">查看详情</v-btn>
                   </v-card-title>
                 </v-card>
               </v-flex>
@@ -169,7 +106,9 @@ export default {
   data() {
     return {
       loading: false,
-      year: null
+      year: null,
+      currentRoute: "",
+      currentGroup: ""
     };
   },
   methods: {
@@ -177,14 +116,26 @@ export default {
       this.loading = true;
       await careService.getRouteList(this.year);
       this.loading = false;
+    },
+    async getCurrentGroup() {
+      this.currentRoute = this.routeList.find(e => {
+        return e.id == this.enrollInfo.routeId;
+      });
+      console.log(this.currentRoute);
+      this.currentGroup = this.currentRoute.travelGroupList.find(e => {
+        return e.id == this.enrollInfo.groupId;
+      });
     }
   },
   computed: {
-    ...mapGetters(["routeList", "userInfo"])
+    ...mapGetters(["routeList", "userInfo", "enrollInfo"])
   },
   mounted() {
     var today = new Date();
     this.year = today.getFullYear();
+    if (this.enrollInfo.groupId) {
+      this.getCurrentGroup();
+    }
   }
 };
 </script>

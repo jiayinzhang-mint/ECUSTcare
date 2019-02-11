@@ -18,9 +18,11 @@ export default {
       if (type == "success") {
         this.color = "success";
         this.message = "操作成功";
-      } else {
+      } else if (type == "fail") {
         this.color = "error darken-1";
         this.message = "操作失败";
+      } else {
+        this.color = "primary";
       }
       this.snackbar = true;
     }

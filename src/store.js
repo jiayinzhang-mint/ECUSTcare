@@ -10,7 +10,8 @@ export default new Vuex.Store({
     userInfo: {
       username: ""
     },
-    routeList: []
+    routeList: [],
+    enrollInfo: {}
   },
   getters: {
     userInfo: state => {
@@ -18,6 +19,9 @@ export default new Vuex.Store({
     },
     routeList: state => {
       return state.routeList;
+    },
+    enrollInfo: state => {
+      return state.enrollInfo;
     }
   },
   mutations: {
@@ -26,11 +30,17 @@ export default new Vuex.Store({
     },
     getRouteList: (state, routeList) => {
       state.routeList = routeList;
+    },
+    enroll: (state, enrollInfo) => {
+      state.enrollInfo = enrollInfo;
     }
   },
   actions: {
     async getRouteList(context, routeList) {
       context.commit("getRouteList", routeList);
+    },
+    async enroll(context, enrollInfo) {
+      context.commit("enroll", enrollInfo);
     }
   },
   plugins: [vuexAlong]
