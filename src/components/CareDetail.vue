@@ -262,19 +262,16 @@ export default {
       this.titleImg = "http://demo.chassstep.com" + this.baseInfo.imageUrl;
     },
     async enroll(groupId) {
-      careService.enroll(this.$route.params.id, groupId);
+      await careService.enroll(this.$route.params.id, groupId);
       this.getRouteInfo();
       this.getBaseInfo();
-      careService.getRouteList();
     },
     async cancel() {
       try {
         await this.$confirm("确认要取消报名吗?");
-        careService.cancel();
+        await careService.cancel();
         this.getRouteInfo();
-        // await careService.getRouteList();
         this.getBaseInfo();
-        careService.getRouteList();
       } catch (err) {
         err;
       }

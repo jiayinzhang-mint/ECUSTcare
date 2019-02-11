@@ -67,7 +67,7 @@ export default {
         this.loading = true;
         try {
           var data = await authService.login(this.username, this.password);
-          await careService.getRouteList(2019);
+          await careService.getRouteList();
           this.loading = false;
           if (data.device == "mobile") {
             this.$router.push({ path: "/mobile/home" });

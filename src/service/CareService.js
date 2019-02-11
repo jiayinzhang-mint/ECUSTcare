@@ -19,6 +19,7 @@ class careService {
       enrollInfo.routeId = routeId;
       enrollInfo.groupId = groupId;
       await store.dispatch("enroll", enrollInfo);
+      await this.getRouteList();
     }
     return rsp;
   }
@@ -32,6 +33,7 @@ class careService {
       enrollInfo.routeId = null;
       enrollInfo.groupId = null;
       await store.dispatch("enroll", enrollInfo);
+      await this.getRouteList();
     }
     return rsp;
   }

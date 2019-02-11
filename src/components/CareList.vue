@@ -14,6 +14,7 @@
           class="mb-3"
           color="primary lighten-1"
           dark
+          ripple
           v-if="enrollInfo.groupId"
           :to="userInfo.device=='desktop'?'/route/'+currentRoute.id:'/mobile/route/'+currentRoute.id"
         >
@@ -31,6 +32,10 @@
               <v-icon>info</v-icon>
             </v-btn>
           </v-card-title>
+        </v-card>
+
+        <v-card class="mb-3" v-else>
+          <v-card-title class="font-weight-medium">当前状态：可报名</v-card-title>
         </v-card>
 
         <h2 class="mb-3 mt-5 subheading font-weight-medium">疗养项目</h2>
