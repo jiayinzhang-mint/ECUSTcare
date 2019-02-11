@@ -7,7 +7,7 @@ var detectDevice = () => {
       return navigator.userAgent.match(/BlackBerry/i) ? true : false;
     },
     iOS: function() {
-      return navigator.userAgent.match(/iPhone|iPad|iPod/i) ? true : false;
+      return navigator.userAgent.match(/iPhone|iPod/i) ? true : false;
     },
     Windows: function() {
       return navigator.userAgent.match(/IEMobile/i) ? true : false;

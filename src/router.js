@@ -40,10 +40,6 @@ export default new Router({
               component: () => import("./views/desktop/Detail")
             }
           ]
-        },
-        {
-          path: "/user",
-          component: () => import("./views/desktop/User")
         }
       ]
     }
