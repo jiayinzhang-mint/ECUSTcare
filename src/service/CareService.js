@@ -1,5 +1,7 @@
 import basicService from "./BasicService";
 import store from "../store";
+import message from "../utils/message";
+
 class careService {
   static async getRouteList() {
     var today = new Date();
@@ -9,12 +11,18 @@ class careService {
     return rsp;
   }
 
+  static async getRouteInfo(routeId) {
+    const rsp = basicService.getRequest("/api/travel-route/" + routeId);
+    return rsp;
+  }
+
   static async enroll(routeId, groupId) {
     const rsp = await basicService.postRequest("/api/travel-applicant/pc", {
       username: store.getters.userInfo.username,
       groupId: groupId
     });
     if (rsp.message == "报名成功") {
+      message.snackbar("success");
       var enrollInfo = {};
       enrollInfo.routeId = routeId;
       enrollInfo.groupId = groupId;
@@ -29,6 +37,7 @@ class careService {
       username: store.getters.userInfo.username
     });
     if (rsp.message == "取消成功") {
+      message.snackbar("success");
       var enrollInfo = {};
       enrollInfo.routeId = null;
       enrollInfo.groupId = null;

@@ -2,35 +2,28 @@
   <div>
     <transition appear appear-active-class="card-enter">
       <div flat class="transparent">
-        <v-container>
-          <v-toolbar flat color="transparent">
-            <v-btn
-              icon
-              class="dim-title mr-3"
-              v-if="userInfo.device=='mobile'"
-              :to="'/mobile/home'"
-            >
-              <v-icon>arrow_back</v-icon>
-            </v-btn>
-            <h2 class="font-weight-medium dim-title">{{baseInfo.routeName}}</h2>
-            <v-spacer></v-spacer>
-            <h2 class="font-weight-medium">¥ {{baseInfo.routePrice}}</h2>
-          </v-toolbar>
-          <v-tabs v-model="tab" centered color="transparent">
-            <v-tabs-slider></v-tabs-slider>
-            <v-tab key="1">简介</v-tab>
-            <v-tab key="2">疗养团</v-tab>
-          </v-tabs>
-          <v-divider></v-divider>
-          <v-tabs-items
-            v-model="tab"
-            class="mt-3"
-            style="height:calc(100vh - 242px);overflow :auto"
-          >
-            <v-tab-item key="1">
+        <v-toolbar flat color="transparent">
+          <v-btn icon class="mr-3" v-if="userInfo.device=='mobile'" :to="'/mobile/home'">
+            <v-icon>arrow_back</v-icon>
+          </v-btn>
+          <h2 class="font-weight-medium dim-title">{{baseInfo.routeName}}</h2>
+          <v-spacer></v-spacer>
+          <h2 class="font-weight-medium">¥ {{baseInfo.routePrice}}</h2>
+        </v-toolbar>
+        <v-tabs v-model="tab" centered color="transparent">
+          <v-tabs-slider></v-tabs-slider>
+          <v-tab key="1">简介</v-tab>
+          <v-tab key="2">疗养团</v-tab>
+        </v-tabs>
+        <v-divider></v-divider>
+        <v-tabs-items v-model="tab" class="mt-3 detail-tab">
+          <v-tab-item key="1">
+            <v-container>
               <div class="mt-5" v-html="routeInfo.activityContent"></div>
-            </v-tab-item>
-            <v-tab-item key="2">
+            </v-container>
+          </v-tab-item>
+          <v-tab-item key="2">
+            <v-container>
               <transition-group appear appear-active-class="card-enter">
                 <template v-for="(item,i) in groupList">
                   <v-layout row :key="i" class="mb-3">
@@ -83,9 +76,9 @@
                   </v-layout>
                 </template>
               </transition-group>
-            </v-tab-item>
-          </v-tabs-items>
-        </v-container>
+            </v-container>
+          </v-tab-item>
+        </v-tabs-items>
       </div>
     </transition>
 
@@ -228,7 +221,9 @@ import careService from "../service/CareService";
 export default {
   data() {
     return {
-      routeInfo: [],
+      routeInfo: {
+        activityContent: ""
+      },
       baseInfo: [],
       groupList: [],
       enrollList: [{}, {}],
@@ -242,13 +237,10 @@ export default {
     };
   },
   methods: {
-    getRouteInfo() {
-      this.$ajax
-        .get("/api/travel-route/" + this.$route.params.id)
-        .then(data => {
-          data = data.data;
-          this.routeInfo = data.route;
-        });
+    async getRouteInfo() {
+      var rsp = await careService.getRouteInfo(this.$route.params.id);
+      this.routeInfo = rsp.route;
+      console.log(rsp);
     },
     close() {
       this.$router.push({ path: "/mobile/home" });

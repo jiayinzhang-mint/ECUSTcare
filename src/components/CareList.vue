@@ -1,14 +1,14 @@
 <template>
   <v-layout fill-height>
     <v-flex xs12 sm4 style="height:calc(100vh - 64px);overflow :auto">
+      <v-toolbar class="transparent" flat style="padding:0">
+        <h1 class="mt-3 headline font-weight-medium dim-title">{{year}} 疗养活动</h1>
+        <v-spacer></v-spacer>
+        <v-btn class="mt-3" icon flat @click="refresh">
+          <v-icon>refresh</v-icon>
+        </v-btn>
+      </v-toolbar>
       <v-container>
-        <v-toolbar class="transparent" flat style="padding:0">
-          <h1 class="mb-3 mt-1 headline font-weight-medium dim-title">{{year}} 疗养活动</h1>
-          <v-spacer></v-spacer>
-          <v-btn icon flat class="mb-3" @click="refresh" style="margin-right:-16px">
-            <v-icon>refresh</v-icon>
-          </v-btn>
-        </v-toolbar>
         <h2 class="mb-3 mt-1 subheading font-weight-medium" v-if="enrollInfo.groupId">已报名</h2>
         <v-card
           class="mb-3"

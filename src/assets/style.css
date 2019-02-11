@@ -12,10 +12,6 @@
   margin: 10px !important
 }
 
-.dim-title {
-  margin-left: -24px !important
-}
-
 .fade-enter-active {
   animation: fade 0.5s
 }
@@ -48,8 +44,17 @@
   }
 }
 
+.detail-tab {
+  height: calc(100vh - 212px);
+  overflow: auto
+}
+
 @media only screen and (max-width: 959px) {
   .dim-title {
-    margin-left: -16px !important
+    margin-left: -10px !important
+  }
+  .detail-tab {
+    height: calc(100vh - 180px);
+    overflow: auto
   }
 }
