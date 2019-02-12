@@ -29,7 +29,7 @@
 }
 
 .v-toolbar.elevation-0 {
-  box-shadow: none
+  box-shadow: none !important
 }
 
 @keyframes fade {
