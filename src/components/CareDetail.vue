@@ -162,8 +162,13 @@ export default {
     async cancel() {
       try {
         await this.$confirm("确认要取消报名吗?");
+        this.$loading.show(true);
+
         await careService.cancel();
+
         this.getRouteInfo();
+        this.$loading.show(false);
+
         this.getBaseInfo();
       } catch (err) {
         err;

@@ -83,7 +83,7 @@
           round
           color="primary"
           v-if="agree"
-          @click="agree=false;enroll($route.params.groupId)"
+          @click="enroll($route.params.groupId)"
         >确认报名</v-btn>
       </v-stepper-content>
     </v-stepper-items>
@@ -103,10 +103,13 @@ export default {
   },
   methods: {
     async enroll() {
+      this.$loading.show(true);
+
       const rsp = await careService.enroll(
         this.$route.params.id,
         this.$route.params.groupId
       );
+      this.$loading.show(false);
       if (rsp.message == "报名成功") {
         this.$emit("enroll");
       }
