@@ -15,7 +15,7 @@ export default new Router({
       children: [
         {
           path: "/mobile/home",
-          component: () => import("./views/mobile/Home")
+          component: () => import("./components/CareList")
         },
         {
           path: "/mobile/user",
@@ -23,7 +23,11 @@ export default new Router({
         },
         {
           path: "/mobile/route/:id",
-          component: () => import("./views/mobile/Detail")
+          component: () => import("./components/CareDetail")
+        },
+        {
+          path: "/mobile/enroll/:id/:groupId",
+          component: () => import("./components/Enroll")
         }
       ]
     },
@@ -38,6 +42,10 @@ export default new Router({
             {
               path: "/route/:id",
               component: () => import("./components/CareDetail")
+            },
+            {
+              path: "/mobile/enroll/:id/:groupId",
+              component: () => import("./components/Enroll")
             }
           ]
         }

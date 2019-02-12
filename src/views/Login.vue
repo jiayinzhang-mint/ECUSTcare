@@ -64,11 +64,11 @@ export default {
   methods: {
     async login() {
       if (this.$refs.loginForm.validate()) {
-        this.loading = true;
+        this.$loading.show(true);
         try {
           var data = await authService.login(this.username, this.password);
           await careService.getRouteList();
-          this.loading = false;
+          this.$loading.show(false);
           if (data.device == "mobile") {
             this.$router.push({ path: "/mobile/home" });
           } else {
