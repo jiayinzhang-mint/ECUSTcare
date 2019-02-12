@@ -44,7 +44,7 @@ export default new Router({
               component: () => import("./components/CareDetail")
             },
             {
-              path: "/mobile/enroll/:id/:groupId",
+              path: "/enroll/:id/:groupId",
               component: () => import("./components/Enroll")
             }
           ]
