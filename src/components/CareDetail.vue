@@ -42,6 +42,8 @@
                             最大人数 {{item.maxNumber}}
                             <br>
                             最小人数 {{item.minNumber}}
+                            <br>
+                            剩余名额 {{item.maxNumber-item.applicantNumber}}
                           </div>
                         </v-card-title>
                         <v-card-actions>
@@ -68,7 +70,7 @@
                             round
                             flat
                             @click="enrollListDialog=true;groupId=item.id"
-                          >已报名人员 {{item.applicantNumber}}</v-btn>
+                          >查看已报名人员 {{item.applicantNumber}}</v-btn>
                         </v-card-actions>
                       </v-card>
                     </v-flex>
