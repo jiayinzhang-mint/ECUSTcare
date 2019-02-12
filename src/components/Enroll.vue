@@ -75,7 +75,7 @@
             <v-radio label="较弱" value="radio-1"></v-radio>
           </v-radio-group>
           <v-text-field label="紧急联系人" required></v-text-field>
-          <v-text-field label="家庭电话" required></v-text-field>
+          <v-text-field label="固定电话" required></v-text-field>
           <v-text-field label="职称" required></v-text-field>
           <v-text-field label="职务" required></v-text-field>
           <v-radio-group label="接受调剂" row>
