@@ -6,9 +6,9 @@
           <v-btn icon class="mr-3" v-if="userInfo.device=='mobile'" :to="'/mobile/home'">
             <v-icon>arrow_back</v-icon>
           </v-btn>
-          <h2 class="font-weight-medium dim-title">{{baseInfo.routeName}}</h2>
+          <h2 class="font-weight-bold dim-title">{{baseInfo.routeName}}</h2>
           <v-spacer></v-spacer>
-          <h2 class="font-weight-medium">¥ {{baseInfo.routePrice}}</h2>
+          <h2 class="font-weight-bold">¥ {{baseInfo.routePrice}}</h2>
         </v-toolbar>
         <v-tabs v-model="tab" centered color="transparent" slider-color="yellow">
           <v-tabs-slider></v-tabs-slider>
@@ -29,22 +29,22 @@
                   <v-layout row :key="i" class="mb-3">
                     <v-flex xs12>
                       <v-card>
-                        <v-card-title>
+                        <v-card-title style="margin-bottom:-15px">
                           <div>
-                            <span class="subheading font-weight-medium">{{item.groupName}}</span>
+                            <span class="subheading font-weight-bold">
+                              {{item.groupName}}
+                             
+                            </span>
                             <br>
                             <span
                               class="grey--text"
                             >{{item.startTime | moment("YYYY-MM-DD")}} 至 {{item.endTime | moment("YYYY-MM-DD")}}</span>
                           </div>
                           <v-spacer></v-spacer>
-                          <div>
-                            最大人数 {{item.maxNumber}}
-                            <br>
-                            最小人数 {{item.minNumber}}
-                            <br>
-                            剩余名额 {{item.maxNumber-item.applicantNumber}}
-                          </div>
+                          <div style="margin-top:-20px"> <span
+                                class="body-2"
+                              >{{item.minNumber}} - {{item.maxNumber}} 人 &nbsp;
+                              <span style="color:#f4511e">剩 {{item.maxNumber-item.applicantNumber}}</span> </span> </div>
                         </v-card-title>
                         <v-card-actions>
                           <v-btn
@@ -96,7 +96,7 @@
           <div v-for="(item,i) in enrollList" :key="i">
             <v-list-tile>
               <v-list-tile-content>
-                <v-list-tile-title>张三</v-list-tile-title>
+                <v-list-tile-title class="font-weight-bold">张三</v-list-tile-title>
                 <v-list-tile-sub-title>男</v-list-tile-sub-title>
               </v-list-tile-content>
               <v-list-tile-content>

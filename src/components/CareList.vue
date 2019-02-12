@@ -2,14 +2,14 @@
   <v-layout fill-height>
     <v-flex xs12 sm4 style="height:calc(100vh - 64px);overflow :auto">
       <v-toolbar class="transparent" flat style="padding:0">
-        <h1 class="mt-3 headline font-weight-medium dim-title">{{year}} 疗养活动</h1>
+        <h1 class="mt-3 headline font-weight-bold dim-title">{{year}} 疗养活动</h1>
         <v-spacer></v-spacer>
         <v-btn class="mt-3" icon flat @click="refresh">
           <v-icon>refresh</v-icon>
         </v-btn>
       </v-toolbar>
       <v-container>
-        <h2 class="mb-3 mt-1 subheading font-weight-medium" v-if="enrollInfo.groupId">已报名</h2>
+        <h2 class="mb-3 mt-1 subheading font-weight-bold" v-if="enrollInfo.groupId">已报名</h2>
         <v-card
           class="mb-3"
           color="primary lighten-1"
@@ -18,7 +18,7 @@
           v-if="enrollInfo.groupId"
           :to="userInfo.device=='desktop'?'/route/'+currentRoute.id:'/mobile/route/'+currentRoute.id"
         >
-          <v-card-title class="font-weight-medium">
+          <v-card-title class="font-weight-bold">
             {{currentRoute.routeName}} - {{currentGroup.groupName}}
             <v-spacer></v-spacer>
             <v-btn
@@ -38,14 +38,18 @@
           <v-card-title class="font-weight-medium">当前状态：可报名</v-card-title>
         </v-card>
 
-        <h2 class="mb-3 mt-5 subheading font-weight-medium">疗养线路</h2>
+        <h2 class="mb-3 mt-5 subheading font-weight-bold">疗养线路</h2>
         <v-card class="mb-3">
-          <v-card-title class="font-weight-medium">报名时间段
+          <v-card-title class="font-weight-bold">报名时间段
             <v-spacer></v-spacer>2019.1.2 00:00 - 2019.11.1 00:00
           </v-card-title>
-          <v-card-title class="font-weight-medium">{{countdownLabel}}
+          <v-card-title class="font-weight-bold">
+            {{countdownLabel}}
             <v-spacer></v-spacer>
-            {{day}}天 {{hr}}:{{min}}:{{sec}}
+            <span class="count-down">{{day}}</span>&nbsp;天&nbsp;&nbsp;
+            <span class="count-down">{{hr}}</span>&nbsp;:&nbsp;
+            <span class="count-down">{{min}}</span>&nbsp;:&nbsp;
+            <span class="count-down">{{sec}}</span>
           </v-card-title>
         </v-card>
         <transition-group appear appear-active-class="card-enter">
@@ -64,7 +68,7 @@
                   ></v-img>
                   <v-card-title>
                     <div>
-                      <span class="subheading font-weight-medium">{{item.routeName}}</span>
+                      <span class="subheading font-weight-bold">{{item.routeName}}</span>
                       <br>
                       <span
                         class="body-2 grey--text"
@@ -141,7 +145,7 @@ export default {
       const end = Date.parse(new Date("2019-12-01"));
       const now = Date.parse(new Date());
       const msec = end - now > 0 ? end - now : now - end;
-      this.countdownLabel = end - now > 0 ? "距离开始时间" : "已开始";
+      this.countdownLabel = end - now > 0 ? "距离报名开始" : "已开始";
       let day = parseInt(msec / 1000 / 60 / 60 / 24);
       let hr = parseInt((msec / 1000 / 60 / 60) % 24);
       let min = parseInt((msec / 1000 / 60) % 60);

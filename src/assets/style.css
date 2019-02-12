@@ -32,6 +32,13 @@
   box-shadow: none !important
 }
 
+.count-down {
+  background-color: rgb(112, 112, 112);
+  color: white;
+  padding: 1px 4px;
+  border-radius: 5px
+}
+
 @keyframes fade {
   from {
     color: rgba(39, 39, 39, 0);
@@ -57,6 +64,11 @@
   overflow: auto
 }
 
+.v-stepper__items {
+  height: calc(100vh - 136px);
+  overflow: auto !important
+}
+
 @media only screen and (max-width: 959px) {
   .dim-title {
     margin-left: -px !important
@@ -64,5 +76,9 @@
   .detail-tab {
     height: calc(100vh - 180px);
     overflow: auto
+  }
+  .v-stepper__items {
+    height: calc(100vh - 128px);
+    overflow: auto !important
   }
 }
