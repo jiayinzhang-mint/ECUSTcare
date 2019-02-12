@@ -23,6 +23,7 @@ export default {
         this.message = "操作失败";
       } else {
         this.color = "primary";
+        this.message = type;
       }
       this.snackbar = true;
     }

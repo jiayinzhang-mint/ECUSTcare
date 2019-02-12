@@ -94,7 +94,7 @@
       </v-container>
     </v-flex>
     <v-flex class="hidden-sm-and-down" sm8 style="background-color:#f5f5f5">
-      <router-view @enroll="updateCurrentGroup" v-if="$route.params.id"></router-view>
+      <router-view @enroll="getCurrentGroup" v-if="$route.params.id"></router-view>
       <v-container v-else fluid fill-height>
         <v-layout align-center justify-center>
           <div class="headline font-weight-light">请选择线路</div>
@@ -123,10 +123,10 @@ export default {
       this.loading = false;
     },
     async getCurrentGroup() {
+      console.log("this");
       this.currentRoute = this.routeList.find(e => {
         return e.id == this.enrollInfo.routeId;
       });
-      console.log(this.currentRoute);
       this.currentGroup = this.currentRoute.travelGroupList.find(e => {
         return e.id == this.enrollInfo.groupId;
       });

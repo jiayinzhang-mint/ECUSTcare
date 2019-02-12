@@ -33,11 +33,11 @@ export default new Router({
       children: [
         {
           path: "/home",
-          component: () => import("./views/desktop/Home"),
+          component: () => import("./components/CareList"),
           children: [
             {
               path: "/route/:id",
-              component: () => import("./views/desktop/Detail")
+              component: () => import("./components/CareDetail")
             }
           ]
         }

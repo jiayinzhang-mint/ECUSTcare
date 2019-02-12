@@ -12,8 +12,8 @@
         </v-toolbar>
         <v-tabs v-model="tab" centered color="transparent" slider-color="yellow">
           <v-tabs-slider></v-tabs-slider>
-          <v-tab key="1">简介</v-tab>
-          <v-tab key="2">疗养团</v-tab>
+          <v-tab key="1">线路简介</v-tab>
+          <v-tab key="2">疗休养团</v-tab>
         </v-tabs>
         <v-divider></v-divider>
         <v-tabs-items v-model="tab" class="mt-3 detail-tab">
@@ -54,7 +54,6 @@
                           >报名</v-btn>
                           <v-btn
                             @click="cancel"
-                            color="error"
                             round
                             flat
                             v-if="enrollInfo.groupId == item.id"
@@ -240,7 +239,7 @@ export default {
     async getRouteInfo() {
       var rsp = await careService.getRouteInfo(this.$route.params.id);
       this.routeInfo = rsp.route;
-      console.log(rsp);
+      // console.log(rsp);
     },
     close() {
       this.$router.push({ path: "/mobile/home" });
@@ -254,25 +253,25 @@ export default {
       this.titleImg = "http://demo.chassstep.com" + this.baseInfo.imageUrl;
     },
     stopBodyScroll(isFixed) {
-      let bodyEl = document.body;
-      let top = 0;
-      if (isFixed) {
-        top = window.scrollY;
-
-        bodyEl.style.position = "fixed";
-        bodyEl.style.top = -top + "px";
-      } else {
-        bodyEl.style.position = "";
-        bodyEl.style.top = "";
-
-        window.scrollTo(0, top); // 回到原先的top
-      }
+      // let bodyEl = document.body;
+      // let top = 0;
+      // if (isFixed) {
+      //   top = window.scrollY;
+      //   bodyEl.style.position = "fixed";
+      //   bodyEl.style.top = -top + "px";
+      // } else {
+      //   bodyEl.style.position = "";
+      //   bodyEl.style.top = "";
+      //   window.scrollTo(0, top); // 回到原先的top
+      // }
     },
     async enroll(groupId) {
-      await careService.enroll(this.$route.params.id, groupId);
+      const rsp = await careService.enroll(this.$route.params.id, groupId);
       this.getRouteInfo();
       this.getBaseInfo();
-      this.$emit("enroll");
+      if (rsp.message == "报名成功") {
+        this.$emit("enroll");
+      }
     },
     async cancel() {
       try {

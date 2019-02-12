@@ -12,6 +12,10 @@
   margin: 10px !important
 }
 
+.v-tabs__item.v-tabs__item--active {
+  color: #f4511e !important
+}
+
 .fade-enter-active {
   animation: fade 0.5s
 }

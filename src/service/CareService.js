@@ -26,8 +26,10 @@ class careService {
       var enrollInfo = {};
       enrollInfo.routeId = routeId;
       enrollInfo.groupId = groupId;
-      await store.dispatch("enroll", enrollInfo);
+      store.dispatch("enroll", enrollInfo);
       await this.getRouteList();
+    } else {
+      message.snackbar(rsp.message);
     }
     return rsp;
   }
