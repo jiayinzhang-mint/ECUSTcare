@@ -144,6 +144,7 @@
 import picUrl from "../plugins/picUrl";
 import { mapGetters } from "vuex";
 import careService from "../service/CareService";
+import authService from "../service/AuthService";
 export default {
   data() {
     return {
@@ -172,7 +173,7 @@ export default {
           icon: "warning"
         }
       ],
-            schoolCheck: [
+      schoolCheck: [
         {
           text: "待审核",
           icon: "more_horiz"
@@ -205,6 +206,7 @@ export default {
   methods: {
     async refresh() {
       this.loading = true;
+      authService.getUserInfo();
       await careService.getRouteList(this.year);
       this.loading = false;
     },
