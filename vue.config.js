@@ -10,11 +10,9 @@ module.exports = {
         plugins: [
           new uglifyPlugin({
             uglifyOptions: {
-              compress: {
-                warnings: false,
-                drop_debugger: true,
-                drop_console: true
-              }
+              warnings: false,
+              drop_debugger: true,
+              drop_console: true
             },
             sourceMap: false,
             parallel: true
