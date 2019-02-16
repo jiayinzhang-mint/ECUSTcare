@@ -43,7 +43,7 @@
                               {{item.minNumber}} - {{item.maxNumber}} 人 &nbsp;
                               <span
                                 style="color:#f4511e"
-                              >剩 {{item.maxNumber-item.applicantNumber}}</span>
+                              >剩余 {{item.maxNumber-item.applicantNumber}}</span>
                             </span>
                           </div>
                         </v-card-title>
