@@ -5,32 +5,26 @@ const uglifyPlugin = require("uglifyjs-webpack-plugin");
 module.exports = {
   assetsDir: "./static",
   configureWebpack: config => {
-    if (process.env.NODE_ENV === "production") {
-      return {
-        optimization: {
-          minimizer: [
-            new uglifyPlugin({
-              uglifyOptions: {
-                compress: {
-                  warnings: false,
-                  drop_debugger: true,
-                  drop_console: true
-                }
-              },
-              sourceMap: false,
-              parallel: true
-            })
-          ]
+    let plugins = [
+      new UglifyJsPlugin({
+        uglifyOptions: {
+          compress: {
+            warnings: false,
+            drop_debugger: true,
+            drop_console: true
+          }
         },
-        plugins: [
-          new compressionPlugin({
-            test: /\.js$|\.html$|\.css/,
-            threshold: 10240,
-            deleteOriginalAssets: false
-          })
-        ]
-      };
-    }
+        sourceMap: false,
+        parallel: true
+      }),
+      new CompressionWebpackPlugin({
+        asset: "[path].gz[query]",
+        algorithm: "gzip",
+        test: new RegExp("\\.(" + ["js", "css"].join("|") + ")$"),
+        threshold: 10240,
+        minRatio: 0.8
+      })
+    ];
   }
 };
 

@@ -77,11 +77,13 @@
           <v-text-field label="紧急联系人" required v-model="fillInfo.emergencyContact"></v-text-field>
           <v-text-field label="固定电话" required v-model="fillInfo.homeTelephone"></v-text-field>
           <v-text-field label="职称 & 职务" required v-model="fillInfo.job"></v-text-field>
-          <v-checkbox v-model="fillInfo.acceptAdjustment" label="接受调剂"></v-checkbox>
           <v-radio-group label="出发地点" v-model="fillInfo.campus" row>
             <v-radio label="闵行校区" value="0"></v-radio>
             <v-radio label="中北校区" value="1"></v-radio>
           </v-radio-group>
+          <v-input label="接受调剂">
+            <v-switch class="ml-3" v-model="fillInfo.acceptAdjustment"></v-switch>
+          </v-input>
           <v-textarea v-model="fillInfo.comment" counter="50" label="备注"></v-textarea>
           <v-checkbox color="primary" v-model="agree" label="确认信息填写准确无误"></v-checkbox>
         </v-form>
