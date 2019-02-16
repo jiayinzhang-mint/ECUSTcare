@@ -1,6 +1,6 @@
 //gzip
-const compressionPlugin = require("compression-webpack-plugin");
-const uglifyPlugin = require("uglifyjs-webpack-plugin");
+const CompressionWebpackPlugin = require("compression-webpack-plugin");
+const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 
 module.exports = {
   assetsDir: "./static",
