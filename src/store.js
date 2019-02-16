@@ -10,10 +10,14 @@ export default new Vuex.Store({
     userInfo: {
       username: ""
     },
+    baseInfo: [],
     routeList: [],
     enrollInfo: {}
   },
   getters: {
+    baseInfo: state => {
+      return state.baseInfo;
+    },
     userInfo: state => {
       return state.userInfo;
     },
@@ -25,6 +29,9 @@ export default new Vuex.Store({
     }
   },
   mutations: {
+    updateBaseInfo: (state, baseInfo) => {
+      state.baseInfo = baseInfo;
+    },
     updateUserInfo: (state, userInfo) => {
       state.userInfo = userInfo;
     },
@@ -36,6 +43,9 @@ export default new Vuex.Store({
     }
   },
   actions: {
+    async updateBaseInfo(context, baseInfo) {
+      context.commit("updateBaseInfo", baseInfo);
+    },
     async getRouteList(context, routeList) {
       context.commit("getRouteList", routeList);
     },

@@ -41,7 +41,8 @@
         <h2 class="mb-3 mt-5 subheading font-weight-bold">疗养线路</h2>
         <v-card class="mb-3">
           <v-card-title class="font-weight-bold">报名时间段
-            <v-spacer></v-spacer>2019.1.2 00:00 - 2019.11.1 00:00
+            <v-spacer></v-spacer>
+            {{baseInfo.startTime | moment("YYYY-MM-DD")}} 至 {{baseInfo.endTime | moment("YYYY-MM-DD")}}
           </v-card-title>
           <v-card-title class="font-weight-bold">
             {{countdownLabel}}
@@ -142,7 +143,7 @@ export default {
       });
     },
     countdown() {
-      const end = Date.parse(new Date("2019-12-01"));
+      const end = Date.parse(new Date(this.baseInfo.startTime));
       const now = Date.parse(new Date());
       const msec = end - now > 0 ? end - now : now - end;
       this.countdownLabel = end - now > 0 ? "距离报名开始" : "已开始";
@@ -161,7 +162,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(["routeList", "userInfo", "enrollInfo"])
+    ...mapGetters(["baseInfo", "routeList", "userInfo", "enrollInfo"])
   },
   mounted() {
     var today = new Date();

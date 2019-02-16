@@ -31,20 +31,21 @@
                       <v-card>
                         <v-card-title style="margin-bottom:-15px">
                           <div>
-                            <span class="subheading font-weight-bold">
-                              {{item.groupName}}
-                             
-                            </span>
+                            <span class="subheading font-weight-bold">{{item.groupName}}</span>
                             <br>
                             <span
                               class="grey--text"
                             >{{item.startTime | moment("YYYY-MM-DD")}} 至 {{item.endTime | moment("YYYY-MM-DD")}}</span>
                           </div>
                           <v-spacer></v-spacer>
-                          <div style="margin-top:-20px"> <span
-                                class="body-2"
-                              >{{item.minNumber}} - {{item.maxNumber}} 人 &nbsp;
-                              <span style="color:#f4511e">剩 {{item.maxNumber-item.applicantNumber}}</span> </span> </div>
+                          <div style="margin-top:-20px">
+                            <span class="body-2">
+                              {{item.minNumber}} - {{item.maxNumber}} 人 &nbsp;
+                              <span
+                                style="color:#f4511e"
+                              >剩 {{item.maxNumber-item.applicantNumber}}</span>
+                            </span>
+                          </div>
                         </v-card-title>
                         <v-card-actions>
                           <v-btn
@@ -69,7 +70,7 @@
                           <v-btn
                             round
                             flat
-                            @click="enrollListDialog=true;groupId=item.id"
+                            @click="enrollListDialog=true;memberList=[];getGroupMember(item.id)"
                           >查看已报名人员 {{item.applicantNumber}}</v-btn>
                         </v-card-actions>
                       </v-card>
@@ -91,17 +92,18 @@
             <v-icon>clear</v-icon>
           </v-btn>
         </v-card-title>
-        <v-divider></v-divider>
+        <v-progress-linear :indeterminate="true" v-if="memberList.length>0?false:true"></v-progress-linear>
         <v-list two-line>
-          <div v-for="(item,i) in enrollList" :key="i">
+          <div v-for="(item,i) in memberList" :key="i">
             <v-list-tile>
               <v-list-tile-content>
-                <v-list-tile-title class="font-weight-bold">张三</v-list-tile-title>
-                <v-list-tile-sub-title>男</v-list-tile-sub-title>
+                <v-list-tile-title class="font-weight-bold">{{item.trueName}}</v-list-tile-title>
+                <!-- <v-list-tile-sub-title v-if="item.sex==1">男</v-list-tile-sub-title>
+                <v-list-tile-sub-title v-if="item.sex==2">女</v-list-tile-sub-title>-->
               </v-list-tile-content>
-              <v-list-tile-content>
-                <v-list-tile-sub-title>工作单位：财务处</v-list-tile-sub-title>
-                <v-list-tile-sub-title>部门工会：财务部门工会</v-list-tile-sub-title>
+              <v-list-tile-content class="text-xs-right">
+                <v-list-tile-sub-title>工作单位：{{item.departmentName}}</v-list-tile-sub-title>
+                <v-list-tile-sub-title>部门工会：{{item.secondaryUnionName}}</v-list-tile-sub-title>
               </v-list-tile-content>
             </v-list-tile>
             <v-divider></v-divider>
@@ -123,10 +125,10 @@ export default {
       },
       baseInfo: [],
       groupList: [],
-      enrollList: [{}, {}],
       titleImg: "",
       tab: null,
-      enrollListDialog: false
+      enrollListDialog: false,
+      memberList: []
     };
   },
   methods: {
@@ -146,18 +148,10 @@ export default {
       // console.log(this.groupList);
       this.titleImg = "http://demo.chassstep.com" + this.baseInfo.imageUrl;
     },
-    stopBodyScroll(isFixed) {
-      // let bodyEl = document.body;
-      // let top = 0;
-      // if (isFixed) {
-      //   top = window.scrollY;
-      //   bodyEl.style.position = "fixed";
-      //   bodyEl.style.top = -top + "px";
-      // } else {
-      //   bodyEl.style.position = "";
-      //   bodyEl.style.top = "";
-      //   window.scrollTo(0, top); // 回到原先的top
-      // }
+    async getGroupMember(groupId) {
+      const rsp = await careService.getGroupMember(groupId);
+      this.memberList = rsp.list;
+      console.log(this.memberList);
     },
     async cancel() {
       try {

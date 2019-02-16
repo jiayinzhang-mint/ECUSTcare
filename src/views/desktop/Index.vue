@@ -42,6 +42,10 @@ export default {
   },
   computed: {
     ...mapGetters(["userInfo"])
+  },
+  async mounted() {
+    const data = await this.$ajax.get("/api/travel/pc/routeList");
+    console.log(data);
   }
 };
 </script>
