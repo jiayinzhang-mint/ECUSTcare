@@ -53,14 +53,17 @@
                             round
                             flat
                             color="primary"
+                            :disabled="enrollInfo.groupId?true:false"
                             :to="userInfo.device=='desktop'?'/enroll/'+$route.params.id+'/'+item.id:'/mobile/enroll/'+$route.params.id+'/'+item.id"
                           >报名</v-btn>
                           <v-btn
                             @click="cancel"
                             round
                             flat
-                            v-if="enrollInfo.groupId == item.id"
+                            :disabled="userInfo.passed==1?true:false"
+                            v-if="enrollInfo.groupId == item.id "
                           >取消报名</v-btn>
+
                           <v-btn
                             round
                             flat

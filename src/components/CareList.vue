@@ -30,7 +30,7 @@
           </v-card-title>
           <v-slide-y-transition>
             <v-list dense v-show="show">
-              <v-list-tile>
+              <v-list-tile v-if="userInfo.unionPassed!=null">
                 <v-list-tile-title class="font-weight-bold">二级部门工会审核</v-list-tile-title>
                 <v-spacer></v-spacer>
                 <v-list-tile-avatar>
@@ -40,7 +40,7 @@
                   <span>{{unionCheck[userInfo.unionPassed].text}}</span>
                 </v-list-tile-content>
               </v-list-tile>
-              <v-list-tile>
+              <v-list-tile v-if="userInfo.passed!=null">
                 <v-list-tile-title class="font-weight-bold">校工会审核</v-list-tile-title>
                 <v-spacer></v-spacer>
                 <v-list-tile-avatar>
@@ -50,7 +50,7 @@
                   <span>{{schoolCheck[userInfo.passed].text}}</span>
                 </v-list-tile-content>
               </v-list-tile>
-              <v-list-tile>
+              <v-list-tile v-if="userInfo.paymentCondition!=null">
                 <v-list-tile-title class="font-weight-bold">缴费情况</v-list-tile-title>
                 <v-spacer></v-spacer>
                 <v-list-tile-avatar>
@@ -83,7 +83,7 @@
             <span class="count-down">{{sec}}</span>
           </v-card-title>
         </v-card>
-        <transition-group appear appear-active-class="card-enter">
+        <transition-group appear appear-active-class="card-enter" v-if="!userInfo.ended || !close">
           <template v-for="(item,i) in routeList">
             <v-layout row :key="i" class="mb-3">
               <v-flex xs12>
@@ -200,7 +200,9 @@ export default {
           text: "无需缴费",
           icon: "check"
         }
-      ]
+      ],
+      now: null,
+      close: false
     };
   },
   methods: {
@@ -248,6 +250,10 @@ export default {
       this.getCurrentGroup();
     }
     this.countdown();
+    const now = Date.parse(new Date());
+    if (this.baseInfo.registrationEndTime < now) {
+      this.close = true;
+    }
   }
 };
 </script>

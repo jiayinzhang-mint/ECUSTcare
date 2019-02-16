@@ -68,16 +68,37 @@
       <v-stepper-content step="3">
         <div class="subheading font-weight-bold mb-3">信息补全</div>
 
-        <v-form>
-          <v-radio-group label="身体状况" row v-model="fillInfo.physicalState">
+        <v-form ref="enrollForm">
+          <v-radio-group
+            required
+            label="身体状况"
+            row
+            v-model="fillInfo.physicalState"
+            :rules="[v => !!v || '必填项']"
+          >
             <v-radio label="健康" value="健康"></v-radio>
             <v-radio label="一般" value="一般"></v-radio>
             <v-radio label="较弱" value="较弱"></v-radio>
           </v-radio-group>
-          <v-text-field label="紧急联系人" required v-model="fillInfo.emergencyContact"></v-text-field>
-          <v-text-field label="固定电话" required v-model="fillInfo.homeTelephone"></v-text-field>
-          <v-text-field label="职称 & 职务" required v-model="fillInfo.job"></v-text-field>
-          <v-radio-group label="出发地点" v-model="fillInfo.campus" row>
+          <v-text-field
+            label="紧急联系人"
+            required
+            v-model="fillInfo.emergencyContact"
+            :rules="[v => !!v || '必填项']"
+          ></v-text-field>
+          <v-text-field
+            label="固定电话"
+            required
+            v-model="fillInfo.homeTelephone"
+            :rules="[v => !!v || '必填项']"
+          ></v-text-field>
+          <v-text-field
+            label="职称 & 职务"
+            required
+            v-model="fillInfo.job"
+            :rules="[v => !!v || '必填项']"
+          ></v-text-field>
+          <v-radio-group label="出发地点" v-model="fillInfo.campus" row :rules="[v => !!v || '必填项']">
             <v-radio label="闵行校区" value="0"></v-radio>
             <v-radio label="中北校区" value="1"></v-radio>
           </v-radio-group>
@@ -118,20 +139,22 @@ export default {
   },
   methods: {
     async enroll() {
-      this.$loading.show(true);
-      const rsp = await careService.enroll(
-        this.$route.params.id,
-        this.$route.params.groupId,
-        this.fillInfo
-      );
-      this.$loading.show(false);
-      if (rsp.message == "报名成功") {
-        this.$emit("enroll");
-      }
-      if (this.userInfo.device == "desktop") {
-        this.$router.push({ path: "/route/" + this.$route.params.id });
-      } else {
-        this.$router.push({ path: "/mobile/route/" + this.$route.params.id });
+      if (this.$refs.enrollForm.validate()) {
+        this.$loading.show(true);
+        const rsp = await careService.enroll(
+          this.$route.params.id,
+          this.$route.params.groupId,
+          this.fillInfo
+        );
+        this.$loading.show(false);
+        if (rsp.message == "报名成功") {
+          this.$emit("enroll");
+        }
+        if (this.userInfo.device == "desktop") {
+          this.$router.push({ path: "/route/" + this.$route.params.id });
+        } else {
+          this.$router.push({ path: "/mobile/route/" + this.$route.params.id });
+        }
       }
     }
   },
