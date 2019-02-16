@@ -1,36 +1,17 @@
 //gzip
-const CompressionWebpackPlugin = require("compression-webpack-plugin");
-const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
-
-module.exports = {
-  assetsDir: "./static",
-  configureWebpack: {
-    optimization: {
-      minimizer: [
-        new UglifyJsPlugin({
-          uglifyOptions: {
-            compress: {
-              warnings: false,
-              drop_console: true, //console
-              drop_debugger: false,
-              pure_funcs: ["console.log"] //移除console
-            }
-          }
-        }),
-        new CompressionWebpackPlugin({
-          asset: "[path].gz[query]",
-          algorithm: "gzip",
-          test: new RegExp("\\.(" + ["js", "css"].join("|") + ")$"),
-          threshold: 10240,
-          minRatio: 0.8
-        })
-      ]
-    }
-  }
-};
+const terserPlugin = require("terser-webpack-plugin");
 
 //proxy
 module.exports = {
+  configureWebpack(config) {
+    // 生产环境去掉console, 注意console里面不要放函数调用, 也会被删掉
+    if (process.env.NODE_ENV === "production") {
+      const terserWebpackPlugin = config.optimization.minimizer[0];
+      const terserOptions = terserWebpackPlugin.options.terserOptions;
+      terserOptions.compress["drop_console"] = true;
+    }
+  },
+
   devServer: {
     proxy: {
       "/": {
