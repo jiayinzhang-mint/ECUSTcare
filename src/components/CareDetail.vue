@@ -94,6 +94,9 @@
         </v-card-title>
         <v-progress-linear :indeterminate="true" v-if="loading"></v-progress-linear>
         <v-list two-line>
+          <v-list-tile v-if="memberList.length<1 && !loading">
+            <v-list-tile-title class="text-xs-center">暂无</v-list-tile-title>
+          </v-list-tile>
           <div v-for="(item,i) in memberList" :key="i">
             <v-list-tile>
               <v-list-tile-content>

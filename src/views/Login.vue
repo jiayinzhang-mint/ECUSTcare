@@ -53,6 +53,7 @@ import authService from "../service/AuthService";
 import careService from "../service/CareService";
 
 import qs from "qs";
+import { mapGetters } from 'vuex';
 export default {
   data() {
     return {
@@ -71,7 +72,7 @@ export default {
           await careService.getRouteList();
           await careService.getBaseInfo();
           this.$loading.show(false);
-          if (data.device == "mobile") {
+          if (this.userInfo.device == "mobile") {
             this.$router.push({ path: "/mobile/home" });
           } else {
             this.$router.push({ path: "/home" });
@@ -81,6 +82,9 @@ export default {
         }
       }
     }
+  },
+  computed:{
+    ...mapGetters(["userInfo"])
   },
   mounted() {}
 };

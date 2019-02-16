@@ -4,11 +4,9 @@ import message from "../utils/message";
 
 class careService {
   static async getBaseInfo() {
-    const rsp = await basicService.getRequest("/api/travel/pc/info");
+    var rsp = await basicService.getRequest("/api/travel/pc/info");
     var baseInfo = {};
-    baseInfo.notification = rsp.notification;
-    baseInfo.startTime = rsp.startTime;
-    baseInfo.endTime = rsp.endTime;
+    baseInfo = rsp.info;
     await store.dispatch("updateBaseInfo", baseInfo);
     return rsp;
   }

@@ -10,14 +10,7 @@
       </v-toolbar>
       <v-container>
         <h2 class="mb-3 mt-1 subheading font-weight-bold" v-if="enrollInfo.groupId">已报名</h2>
-        <v-card
-          class="mb-3"
-          color="primary lighten-1"
-          dark
-          ripple
-          v-if="enrollInfo.groupId"
-          :to="userInfo.device=='desktop'?'/route/'+currentRoute.id:'/mobile/route/'+currentRoute.id"
-        >
+        <v-card class="mb-3" color="primary lighten-1" dark ripple v-if="enrollInfo.groupId">
           <v-card-title class="font-weight-bold">
             {{currentRoute.routeName}} - {{currentGroup.groupName}}
             <v-spacer></v-spacer>
@@ -31,18 +24,55 @@
             >
               <v-icon>info</v-icon>
             </v-btn>
+            <v-btn icon @click="show = !show">
+              <v-icon>{{ show ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}</v-icon>
+            </v-btn>
           </v-card-title>
+          <v-slide-y-transition>
+            <v-list dense v-show="show">
+              <v-list-tile>
+                <v-list-tile-title class="font-weight-bold">二级部门工会审核</v-list-tile-title>
+                <v-spacer></v-spacer>
+                <v-list-tile-avatar>
+                  <v-icon>{{unionCheck[userInfo.unionPassed].icon}}</v-icon>
+                </v-list-tile-avatar>
+                <v-list-tile-content>
+                  <span>{{unionCheck[userInfo.unionPassed].text}}</span>
+                </v-list-tile-content>
+              </v-list-tile>
+              <v-list-tile>
+                <v-list-tile-title class="font-weight-bold">校工会审核</v-list-tile-title>
+                <v-spacer></v-spacer>
+                <v-list-tile-avatar>
+                  <v-icon>{{schoolCheck[userInfo.passed].icon}}</v-icon>
+                </v-list-tile-avatar>
+                <v-list-tile-content>
+                  <span>{{schoolCheck[userInfo.passed].text}}</span>
+                </v-list-tile-content>
+              </v-list-tile>
+              <v-list-tile>
+                <v-list-tile-title class="font-weight-bold">缴费情况</v-list-tile-title>
+                <v-spacer></v-spacer>
+                <v-list-tile-avatar>
+                  <v-icon>{{payCheck[userInfo.paymentCondition].icon}}</v-icon>
+                </v-list-tile-avatar>
+                <v-list-tile-content>
+                  <span>{{payCheck[userInfo.paymentCondition].text}}</span>
+                </v-list-tile-content>
+              </v-list-tile>
+            </v-list>
+          </v-slide-y-transition>
         </v-card>
 
         <v-card class="mb-3" v-else>
-          <v-card-title class="font-weight-medium">当前状态：可报名</v-card-title>
+          <v-card-title class="font-weight-medium">当前状态: {{userInfo.travelable?"可报名":"不可报名"}}</v-card-title>
         </v-card>
 
         <h2 class="mb-3 mt-5 subheading font-weight-bold">疗养线路</h2>
         <v-card class="mb-3">
           <v-card-title class="font-weight-bold">报名时间段
             <v-spacer></v-spacer>
-            {{baseInfo.startTime | moment("YYYY-MM-DD")}} 至 {{baseInfo.endTime | moment("YYYY-MM-DD")}}
+            {{baseInfo.registrationStartTime | moment("YYYY-MM-DD")}} 至 {{baseInfo.registrationEndTime | moment("YYYY-MM-DD")}}
           </v-card-title>
           <v-card-title class="font-weight-bold">
             {{countdownLabel}}
@@ -126,7 +156,50 @@ export default {
       hr: 0,
       min: 0,
       sec: 0,
-      countdownLabel: ""
+      countdownLabel: "",
+      show: false,
+      unionCheck: [
+        {
+          text: "待审核",
+          icon: "more_horiz"
+        },
+        {
+          text: "已通过",
+          icon: "check"
+        },
+        {
+          text: "未通过",
+          icon: "warning"
+        }
+      ],
+            schoolCheck: [
+        {
+          text: "待审核",
+          icon: "more_horiz"
+        },
+        {
+          text: "已通过",
+          icon: "check"
+        },
+        {
+          text: "未通过",
+          icon: "warning"
+        }
+      ],
+      payCheck: [
+        {
+          text: "待缴费",
+          icon: "more_horiz"
+        },
+        {
+          text: "已缴费",
+          icon: "check"
+        },
+        {
+          text: "无需缴费",
+          icon: "check"
+        }
+      ]
     };
   },
   methods: {
@@ -145,7 +218,7 @@ export default {
       });
     },
     countdown() {
-      const end = Date.parse(new Date(this.baseInfo.startTime));
+      const end = Date.parse(new Date(this.baseInfo.registrationStartTime));
       const now = Date.parse(new Date());
       const msec = end - now > 0 ? end - now : now - end;
       this.countdownLabel = end - now > 0 ? "距离报名开始" : "已开始";
@@ -177,5 +250,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+

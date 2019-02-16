@@ -22,13 +22,7 @@ class AuthService {
   static async getUserInfo() {
     var rsp = await basicService.getRequest("/api/travel/pc/userInfo");
     const device = detectDevice();
-    const userInfo = {};
-    userInfo.username = rsp.username;
-    userInfo.trueName = rsp.trueName;
-    userInfo.sfzjh = rsp.sfzjh;
-    userInfo.sex = rsp.sex;
-    userInfo.phone = rsp.phone;
-    userInfo.departmentName = rsp.departmentName;
+    var userInfo = rsp;
 
     var enrollInfo = {};
     try {
@@ -40,7 +34,7 @@ class AuthService {
     store.dispatch("enroll", enrollInfo);
 
     userInfo.device = device;
-    rsp.device = device;
+    console.log(userInfo);
     store.commit("updateUserInfo", userInfo);
     return rsp;
   }
