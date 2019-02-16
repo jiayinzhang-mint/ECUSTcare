@@ -92,7 +92,7 @@
             <v-icon>clear</v-icon>
           </v-btn>
         </v-card-title>
-        <v-progress-linear :indeterminate="true" v-if="memberList.length>0?false:true"></v-progress-linear>
+        <v-progress-linear :indeterminate="true" v-if="loading"></v-progress-linear>
         <v-list two-line>
           <div v-for="(item,i) in memberList" :key="i">
             <v-list-tile>
@@ -128,7 +128,8 @@ export default {
       titleImg: "",
       tab: null,
       enrollListDialog: false,
-      memberList: []
+      memberList: [],
+      loading: false
     };
   },
   methods: {
@@ -149,9 +150,10 @@ export default {
       this.titleImg = "http://demo.chassstep.com" + this.baseInfo.imageUrl;
     },
     async getGroupMember(groupId) {
+      this.loading = true;
       const rsp = await careService.getGroupMember(groupId);
+      this.loading = false;
       this.memberList = rsp.list;
-      console.log(this.memberList);
     },
     async cancel() {
       try {
