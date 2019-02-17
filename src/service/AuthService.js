@@ -10,7 +10,8 @@ class AuthService {
       "/login",
       qs.stringify({
         username: username,
-        password: password
+        password: password,
+        type: "normal"
       })
     );
     if (rsp.message == "登陆成功") {
