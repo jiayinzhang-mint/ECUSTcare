@@ -30,6 +30,15 @@
           </v-card-title>
           <v-slide-y-transition>
             <v-list dense v-show="show">
+              <v-divider></v-divider>
+              <v-list-tile>
+                <v-list-tile-title class="font-weight-bold">
+                  日程
+                </v-list-tile-title>
+                <v-list-tile-title>{{currentGroup.startTime | moment("YYYY-MM-DD")}} 至 {{currentGroup.endTime | moment("YYYY-MM-DD")}}</v-list-tile-title>
+              </v-list-tile>
+              <v-divider></v-divider>
+
               <v-list-tile v-if="userInfo.unionPassed!=null">
                 <v-list-tile-title class="font-weight-bold">二级部门工会审核</v-list-tile-title>
                 <v-spacer></v-spacer>
