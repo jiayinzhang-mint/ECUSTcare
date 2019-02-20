@@ -53,7 +53,9 @@
                             round
                             flat
                             color="primary"
-                            :disabled="enrollInfo.groupId?true:false"
+                            :disabled="(enrollInfo.groupId || baseInfo.registrationStartTime>now || baseInfo.registrationEndTime<now ||
+                            item.startTime>now||
+                            item.endTime<now)?true:false"
                             :to="userInfo.device=='desktop'?'/enroll/'+$route.params.id+'/'+item.id:'/mobile/enroll/'+$route.params.id+'/'+item.id"
                           >报名</v-btn>
                           <v-btn
@@ -135,7 +137,8 @@ export default {
       tab: null,
       enrollListDialog: false,
       memberList: [],
-      loading: false
+      loading: false,
+      now: ""
     };
   },
   methods: {
@@ -183,6 +186,7 @@ export default {
   mounted() {
     this.getRouteInfo();
     this.getBaseInfo();
+    this.now = new Date();
   },
   beforeRouteUpdate(to, from, next) {
     next();
