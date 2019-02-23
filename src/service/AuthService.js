@@ -26,9 +26,9 @@ class AuthService {
     const device = detectDevice();
     console.log(rsp.code);
 
-    if (rsp.code == 403) {
-      window.location.href = "http://ghhd.ecnu.edu.cn/pc/login";
-    }
+    // if (rsp.code == 403) {
+    //   window.location.href = "http://ghhd.ecnu.edu.cn/pc/login";
+    // }
     var userInfo = rsp;
     var enrollInfo = {};
     try {
