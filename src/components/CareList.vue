@@ -2,10 +2,10 @@
   <v-layout fill-height>
     <v-flex xs12 sm4>
       <v-toolbar class="transparent" flat style="padding:0">
-        <v-btn icon>
-          <v-icon>app</v-icon>
+        <v-btn class="mt-3" icon @click="backToLauncher">
+          <v-icon>apps</v-icon>
         </v-btn>
-        <h1 class="mt-3 headline font-weight-bold dim-title">{{year}} 疗养活动</h1>
+        <h1 class="headline font-weight-bold dim-title" style="margin-top:11px">{{year}} 疗养活动</h1>
         <v-spacer></v-spacer>
         <v-btn class="mt-3" icon flat @click="refresh">
           <v-icon>refresh</v-icon>
@@ -254,6 +254,9 @@ export default {
       setTimeout(function() {
         that.countdown();
       }, 1000);
+    },
+    backToLauncher() {
+      window.location.href = "http://ghhd.ecnu.edu.cn/wx/home";
     }
   },
   computed: {
