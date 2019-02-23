@@ -32,9 +32,7 @@
             <v-list dense v-show="show">
               <v-divider></v-divider>
               <v-list-tile>
-                <v-list-tile-title class="font-weight-bold">
-                  日程
-                </v-list-tile-title>
+                <v-list-tile-title class="font-weight-bold">日程</v-list-tile-title>
                 <v-list-tile-title>{{currentGroup.startTime | moment("YYYY-MM-DD")}} 至 {{currentGroup.endTime | moment("YYYY-MM-DD")}}</v-list-tile-title>
               </v-list-tile>
               <v-divider></v-divider>
@@ -81,15 +79,17 @@
         <v-card class="mb-3">
           <v-card-title class="font-weight-bold">报名时间段
             <v-spacer></v-spacer>
-            {{baseInfo.registrationStartTime | moment("YYYY-MM-DD")}} 至 {{baseInfo.registrationEndTime | moment("YYYY-MM-DD")}}
+            <div>{{baseInfo.registrationStartTime | moment("YYYY-MM-DD")}} 至 {{baseInfo.registrationEndTime | moment("YYYY-MM-DD")}}</div>
           </v-card-title>
           <v-card-title class="font-weight-bold">
             {{countdownLabel}}
             <v-spacer></v-spacer>
-            <span class="count-down">{{day}}</span>&nbsp;天&nbsp;&nbsp;
-            <span class="count-down">{{hr}}</span>&nbsp;:&nbsp;
-            <span class="count-down">{{min}}</span>&nbsp;:&nbsp;
-            <span class="count-down">{{sec}}</span>
+            <div v-if="countdownLabel!='已结束'">
+              <span class="count-down">{{day}}</span>&nbsp;天&nbsp;&nbsp;
+              <span class="count-down">{{hr}}</span>&nbsp;:&nbsp;
+              <span class="count-down">{{min}}</span>&nbsp;:&nbsp;
+              <span class="count-down">{{sec}}</span>
+            </div>
           </v-card-title>
         </v-card>
         <transition-group appear appear-active-class="card-enter" v-if="!userInfo.ended || !close">
@@ -117,10 +117,10 @@
                     <v-spacer></v-spacer>
                     <v-btn
                       flat
-                      block
                       round
                       color="primary"
                       :to="userInfo.device=='desktop'?'/route/'+item.id:'/mobile/route/'+item.id"
+                      class="hidden-sm-and-down"
                     >我要报名</v-btn>
                   </v-card-title>
                 </v-card>
@@ -231,10 +231,14 @@ export default {
       });
     },
     countdown() {
-      const end = Date.parse(new Date(this.baseInfo.registrationStartTime));
+      const startTime = Date.parse(
+        new Date(this.baseInfo.registrationStartTime)
+      );
+      const endTime = Date.parse(new Date(this.baseInfo.registrationEndTime));
       const now = Date.parse(new Date());
-      const msec = end - now > 0 ? end - now : now - end;
-      this.countdownLabel = end - now > 0 ? "距离报名开始" : "已开始";
+      const msec = startTime - now > 0 ? startTime - now : now - startTime;
+      this.countdownLabel = startTime - now > 0 ? "距离报名开始" : "已开始";
+      if (endTime - now < 0) this.countdownLabel = "已结束";
       let day = parseInt(msec / 1000 / 60 / 60 / 24);
       let hr = parseInt((msec / 1000 / 60 / 60) % 24);
       let min = parseInt((msec / 1000 / 60) % 60);
