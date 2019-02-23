@@ -3,6 +3,7 @@ import detectDevice from "../utils/device";
 import message from "../utils/message";
 import store from "../store";
 import qs from "qs";
+import Vue from "vue";
 
 class AuthService {
   static async login(username, password) {
@@ -23,8 +24,12 @@ class AuthService {
   static async getUserInfo() {
     var rsp = await basicService.getRequest("/api/travel/pc/userInfo");
     const device = detectDevice();
-    var userInfo = rsp;
+    console.log(rsp.code);
 
+    if (rsp.code == 403) {
+      window.location.href = "http://ghhd.ecnu.edu.cn/pc/login";
+    }
+    var userInfo = rsp;
     var enrollInfo = {};
     try {
       enrollInfo.routeId = rsp.routeId;
