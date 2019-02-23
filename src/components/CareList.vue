@@ -3,7 +3,7 @@
     <v-flex xs12 sm4>
       <v-toolbar class="transparent" flat style="padding:0">
         <v-btn class="mt-3" icon @click="backToLauncher">
-          <v-icon>apps</v-icon>
+          <v-icon>home</v-icon>
         </v-btn>
         <h1 class="headline font-weight-bold dim-title" style="margin-top:11px">{{year}} 疗养活动</h1>
         <v-spacer></v-spacer>
