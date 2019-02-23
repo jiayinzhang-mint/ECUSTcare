@@ -61,7 +61,6 @@
                             flat
                             color="primary"
                             :disabled="(enrollInfo.groupId || baseInfo.registrationStartTime>now || baseInfo.registrationEndTime<now ||
-                            item.startTime>now||
                             item.endTime<now)?true:false"
                             :to="userInfo.device=='desktop'?'/enroll/'+$route.params.id+'/'+item.id:'/mobile/enroll/'+$route.params.id+'/'+item.id"
                           >报名</v-btn>

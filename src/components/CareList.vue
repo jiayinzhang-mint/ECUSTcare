@@ -1,7 +1,10 @@
 <template>
   <v-layout fill-height>
-    <v-flex xs12 sm4 style="height:calc(100vh - 64px);overflow :auto">
+    <v-flex xs12 sm4>
       <v-toolbar class="transparent" flat style="padding:0">
+        <v-btn icon>
+          <v-icon>app</v-icon>
+        </v-btn>
         <h1 class="mt-3 headline font-weight-bold dim-title">{{year}} 疗养活动</h1>
         <v-spacer></v-spacer>
         <v-btn class="mt-3" icon flat @click="refresh">
