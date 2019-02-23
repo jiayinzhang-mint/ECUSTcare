@@ -56,6 +56,11 @@
   border-radius: 5px
 }
 
+.route_list {
+  height: calc(100vh - 64px);
+  overflow: auto
+}
+
 @keyframes fade {
   from {
     color: rgba(39, 39, 39, 0);
@@ -97,5 +102,9 @@
   .v-stepper__items {
     height: calc(100vh - 72px);
     overflow: auto !important
+  }
+  .route_list {
+    height: calc(100vh);
+    overflow: auto
   }
 }

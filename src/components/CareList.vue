@@ -1,9 +1,9 @@
 <template>
   <v-layout fill-height>
-    <v-flex xs12 sm4>
+    <v-flex xs12 sm4 class="route_list">
       <v-toolbar class="transparent" flat style="padding:0">
         <v-btn class="mt-3" icon @click="backToLauncher">
-          <v-icon>home</v-icon>
+          <v-icon>arrow_back</v-icon>
         </v-btn>
         <h1 class="headline font-weight-bold dim-title" style="margin-top:11px">{{year}} 疗养活动</h1>
         <v-spacer></v-spacer>
@@ -40,7 +40,7 @@
               </v-list-tile>
               <v-divider></v-divider>
 
-              <v-list-tile v-if="userInfo.unionPassed!=null">
+              <v-list-tile>
                 <v-list-tile-title class="font-weight-bold">二级部门工会审核</v-list-tile-title>
                 <v-spacer></v-spacer>
                 <v-list-tile-avatar>
@@ -50,7 +50,7 @@
                   <span>{{unionCheck[userInfo.unionPassed].text}}</span>
                 </v-list-tile-content>
               </v-list-tile>
-              <v-list-tile v-if="userInfo.passed!=null">
+              <v-list-tile>
                 <v-list-tile-title class="font-weight-bold">校工会审核</v-list-tile-title>
                 <v-spacer></v-spacer>
                 <v-list-tile-avatar>
@@ -60,7 +60,7 @@
                   <span>{{schoolCheck[userInfo.passed].text}}</span>
                 </v-list-tile-content>
               </v-list-tile>
-              <v-list-tile v-if="userInfo.paymentCondition!=null">
+              <v-list-tile>
                 <v-list-tile-title class="font-weight-bold">缴费情况</v-list-tile-title>
                 <v-spacer></v-spacer>
                 <v-list-tile-avatar>
