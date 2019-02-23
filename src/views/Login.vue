@@ -53,7 +53,7 @@ import authService from "../service/AuthService";
 import careService from "../service/CareService";
 
 import qs from "qs";
-import { mapGetters } from 'vuex';
+import { mapGetters } from "vuex";
 export default {
   data() {
     return {
@@ -83,7 +83,7 @@ export default {
       }
     }
   },
-  computed:{
+  computed: {
     ...mapGetters(["userInfo"])
   },
   mounted() {}
