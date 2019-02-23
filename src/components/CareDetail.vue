@@ -32,13 +32,20 @@
                         <v-card-title style="margin-bottom:-15px">
                           <div>
                             <span class="subheading font-weight-bold">{{item.groupName}}</span>
+                            <br class="hidden-sm-and-up">
+                            <span class="body-2 hidden-sm-and-up">
+                              {{item.minNumber}} - {{item.maxNumber}} 人 &nbsp;
+                              <span
+                                style="color:#f4511e"
+                              >剩余 {{item.maxNumber-item.applicantNumber}}</span>
+                            </span>
                             <br>
                             <span
                               class="grey--text"
                             >{{item.startTime | moment("YYYY-MM-DD")}} 至 {{item.endTime | moment("YYYY-MM-DD")}}</span>
                           </div>
-                          <v-spacer></v-spacer>
-                          <div style="margin-top:-20px">
+                          <v-spacer class="hidden-sm-and-down"></v-spacer>
+                          <div class="hidden-sm-and-down" style="margin-top:-20px">
                             <span class="body-2">
                               {{item.minNumber}} - {{item.maxNumber}} 人 &nbsp;
                               <span
