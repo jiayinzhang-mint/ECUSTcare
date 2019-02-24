@@ -151,9 +151,9 @@ export default {
           this.$emit("enroll");
         }
         if (this.userInfo.device == "desktop") {
-          this.$router.push({ path: "/route/" + this.$route.params.id });
+          this.$router.push({ path: "/home" });
         } else {
-          this.$router.push({ path: "/mobile/route/" + this.$route.params.id });
+          this.$router.push({ path: "/mobile/home" });
         }
       }
     }
