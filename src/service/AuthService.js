@@ -26,9 +26,13 @@ class AuthService {
     const device = detectDevice();
     console.log(rsp.code);
 
-    // if (rsp.code == 403) {
-    //   window.location.href = "http://ghhd.ecnu.edu.cn/pc/login";
-    // }
+    if (rsp.code == 403) {
+      if (device == "desktop") {
+        window.location.href = "http://ghhd.ecnu.edu.cn/pc/login";
+      } else {
+        window.location.href = "http://ghhd.ecnu.edu.cn/wechat/index";
+      }
+    }
     var userInfo = rsp;
     var enrollInfo = {};
     try {
