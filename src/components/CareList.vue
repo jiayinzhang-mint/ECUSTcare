@@ -79,6 +79,7 @@
         </v-card>
 
         <h2 class="mb-3 mt-5 subheading font-weight-bold">疗养线路</h2>
+
         <v-card class="mb-3">
           <v-card-title class="font-weight-bold">报名时间段
             <v-spacer></v-spacer>
@@ -99,34 +100,38 @@
           <template v-for="(item,i) in routeList">
             <v-layout row :key="i" class="mb-3">
               <v-flex xs12>
-                <v-card
-                  ripple
-                  :to="userInfo.device=='desktop'?'/route/'+item.id:'/mobile/route/'+item.id"
-                >
-                  <v-img
-                    class="white--text"
-                    :aspect-ratio="16/6"
-                    :src="picUrl+item.imageUrl"
-                    v-if="item.imageUrl"
-                  ></v-img>
-                  <v-card-title>
-                    <div>
-                      <span class="subheading font-weight-bold">{{item.routeName}}</span>
-                      <br>
-                      <span
-                        class="body-2 grey--text"
-                      >¥ {{item.routePrice}} &nbsp;{{item.travelGroupList.length}}个疗养团</span>
-                    </div>
-                    <v-spacer></v-spacer>
-                    <v-btn
-                      flat
-                      round
-                      color="primary"
-                      :to="userInfo.device=='desktop'?'/route/'+item.id:'/mobile/route/'+item.id"
-                      class="hidden-sm-and-down"
-                    >我要报名</v-btn>
-                  </v-card-title>
-                </v-card>
+                <v-hover>
+                  <v-card
+                    slot-scope="{ hover }"
+                    :class="`elevation-${hover ? 12 : 2}`"
+                    ripple
+                    :to="userInfo.device=='desktop'?'/route/'+item.id:'/mobile/route/'+item.id"
+                  >
+                    <v-img
+                      class="white--text"
+                      :aspect-ratio="16/6"
+                      :src="picUrl+item.imageUrl"
+                      v-if="item.imageUrl"
+                    ></v-img>
+                    <v-card-title>
+                      <div>
+                        <span class="subheading font-weight-bold">{{item.routeName}}</span>
+                        <br>
+                        <span
+                          class="body-2 grey--text"
+                        >¥ {{item.routePrice}} &nbsp;{{item.travelGroupList.length}}个疗养团</span>
+                      </div>
+                      <v-spacer></v-spacer>
+                      <v-btn
+                        flat
+                        round
+                        color="primary"
+                        :to="userInfo.device=='desktop'?'/route/'+item.id:'/mobile/route/'+item.id"
+                        class="hidden-sm-and-down"
+                      >我要报名</v-btn>
+                    </v-card-title>
+                  </v-card>
+                </v-hover>
               </v-flex>
             </v-layout>
           </template>

@@ -28,63 +28,65 @@
                 <template v-for="(item,i) in groupList">
                   <v-layout row :key="i" class="mb-3">
                     <v-flex xs12>
-                      <v-card>
-                        <v-card-title style="margin-bottom:-15px">
-                          <div>
-                            <span class="subheading font-weight-bold">{{item.groupName}}</span>
-                            <br class="hidden-sm-and-up">
-                            <span class="body-2 hidden-sm-and-up">
-                              {{item.minNumber}} - {{item.maxNumber}} 人 &nbsp;
+                      <v-hover>
+                        <v-card slot-scope="{ hover }" :class="`elevation-${hover ? 12 : 2}`">
+                          <v-card-title style="margin-bottom:-15px">
+                            <div>
+                              <span class="subheading font-weight-bold">{{item.groupName}}</span>
+                              <br class="hidden-sm-and-up">
+                              <span class="body-2 hidden-sm-and-up">
+                                {{item.minNumber}} - {{item.maxNumber}} 人 &nbsp;
+                                <span
+                                  style="color:#f4511e"
+                                >剩余 {{item.maxNumber-item.applicantNumber}}</span>
+                              </span>
+                              <br>
                               <span
-                                style="color:#f4511e"
-                              >剩余 {{item.maxNumber-item.applicantNumber}}</span>
-                            </span>
-                            <br>
-                            <span
-                              class="grey--text"
-                            >{{item.startTime | moment("YYYY-MM-DD")}} 至 {{item.endTime | moment("YYYY-MM-DD")}}</span>
-                          </div>
-                          <v-spacer class="hidden-sm-and-down"></v-spacer>
-                          <div class="hidden-sm-and-down" style="margin-top:-20px">
-                            <span class="body-2">
-                              {{item.minNumber}} - {{item.maxNumber}} 人 &nbsp;
-                              <span
-                                style="color:#f4511e"
-                              >剩余 {{item.maxNumber-item.applicantNumber}}</span>
-                            </span>
-                          </div>
-                        </v-card-title>
-                        <v-card-actions>
-                          <v-btn
-                            v-if="item.maxNumber-item.applicantNumber>0 && enrollInfo.groupId != item.id"
-                            round
-                            flat
-                            color="primary"
-                            :disabled="(enrollInfo.groupId || baseInfo.registrationStartTime>now || baseInfo.registrationEndTime<now ||
+                                class="grey--text"
+                              >{{item.startTime | moment("YYYY-MM-DD")}} 至 {{item.endTime | moment("YYYY-MM-DD")}}</span>
+                            </div>
+                            <v-spacer class="hidden-sm-and-down"></v-spacer>
+                            <div class="hidden-sm-and-down" style="margin-top:-20px">
+                              <span class="body-2">
+                                {{item.minNumber}} - {{item.maxNumber}} 人 &nbsp;
+                                <span
+                                  style="color:#f4511e"
+                                >剩余 {{item.maxNumber-item.applicantNumber}}</span>
+                              </span>
+                            </div>
+                          </v-card-title>
+                          <v-card-actions>
+                            <v-btn
+                              v-if="item.maxNumber-item.applicantNumber>0 && enrollInfo.groupId != item.id"
+                              round
+                              flat
+                              color="primary"
+                              :disabled="(enrollInfo.groupId || baseInfo.registrationStartTime>now || baseInfo.registrationEndTime<now ||
                             item.endTime<now)?true:false"
-                            :to="userInfo.device=='desktop'?'/enroll/'+$route.params.id+'/'+item.id:'/mobile/enroll/'+$route.params.id+'/'+item.id"
-                          >报名</v-btn>
-                          <v-btn
-                            @click="cancel"
-                            round
-                            flat
-                            :disabled="userInfo.passed==1?true:false"
-                            v-if="enrollInfo.groupId == item.id "
-                          >取消报名</v-btn>
+                              :to="userInfo.device=='desktop'?'/enroll/'+$route.params.id+'/'+item.id:'/mobile/enroll/'+$route.params.id+'/'+item.id"
+                            >报名</v-btn>
+                            <v-btn
+                              @click="cancel"
+                              round
+                              flat
+                              :disabled="userInfo.passed==1?true:false"
+                              v-if="enrollInfo.groupId == item.id "
+                            >取消报名</v-btn>
 
-                          <v-btn
-                            round
-                            flat
-                            disabled
-                            v-if="item.maxNumber-item.applicantNumber<=0 && enrollInfo.groupId != item.id"
-                          >已满</v-btn>
-                          <v-btn
-                            round
-                            flat
-                            @click="enrollListDialog=true;memberList=[];getGroupMember(item.id)"
-                          >查看已报名人员 {{item.applicantNumber}}</v-btn>
-                        </v-card-actions>
-                      </v-card>
+                            <v-btn
+                              round
+                              flat
+                              disabled
+                              v-if="item.maxNumber-item.applicantNumber<=0 && enrollInfo.groupId != item.id"
+                            >已满</v-btn>
+                            <v-btn
+                              round
+                              flat
+                              @click="enrollListDialog=true;memberList=[];getGroupMember(item.id)"
+                            >查看已报名人员 {{item.applicantNumber}}</v-btn>
+                          </v-card-actions>
+                        </v-card>
+                      </v-hover>
                     </v-flex>
                   </v-layout>
                 </template>

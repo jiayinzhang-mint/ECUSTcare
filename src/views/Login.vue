@@ -12,8 +12,8 @@ import { mapGetters } from "vuex";
 export default {
   data() {
     return {
-      username: "",
-      password: "",
+      username: "admin",
+      password: "123456",
       loading: false
     };
   },
@@ -21,7 +21,7 @@ export default {
     async login() {
       this.$loading.show(true);
       try {
-        // var data = await authService.login(this.username, this.password);
+        var data = await authService.login(this.username, this.password);
         await authService.getUserInfo();
         await careService.getRouteList();
         await careService.getBaseInfo();

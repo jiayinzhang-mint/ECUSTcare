@@ -27,11 +27,11 @@ class AuthService {
     console.log(rsp.code);
 
     if (rsp.code == 403) {
-      if (device == "desktop") {
-        window.location.href = "http://ghhd.ecnu.edu.cn/pc/login";
-      } else {
-        window.location.href = "http://ghhd.ecnu.edu.cn/wechat/index";
-      }
+      // if (device == "desktop") {
+      //   window.location.href = "http://ghhd.ecnu.edu.cn/pc/login";
+      // } else {
+      //   window.location.href = "http://ghhd.ecnu.edu.cn/wechat/index";
+      // }
     }
     var userInfo = rsp;
     var enrollInfo = {};
