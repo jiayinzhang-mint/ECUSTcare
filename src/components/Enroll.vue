@@ -88,13 +88,13 @@
             :rules="[v => !!v || '必填项']"
           ></v-text-field>
           <v-text-field
-            label="固定电话"
+            label="联系电话"
             required
             v-model="fillInfo.homeTelephone"
             :rules="[v => !!v || '必填项']"
           ></v-text-field>
           <v-text-field
-            label="职称 & 职务"
+            label="职称 / 职务"
             required
             v-model="fillInfo.job"
             :rules="[v => !!v || '必填项']"

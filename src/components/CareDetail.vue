@@ -6,9 +6,9 @@
           <v-btn icon class="mr-3" v-if="userInfo.device=='mobile'" :to="'/mobile/home'">
             <v-icon>arrow_back</v-icon>
           </v-btn>
-          <h2 class="font-weight-bold dim-title">{{baseInfo.routeName}}</h2>
+          <h2 class="font-weight-bold dim-title">{{routeBaseInfo.routeName}}</h2>
           <v-spacer></v-spacer>
-          <h2 class="font-weight-bold">¥ {{baseInfo.routePrice}}</h2>
+          <h2 class="font-weight-bold">¥ {{routeBaseInfo.routePrice}}</h2>
         </v-toolbar>
         <v-tabs v-model="tab" centered color="transparent" slider-color="yellow">
           <v-tabs-slider></v-tabs-slider>
@@ -19,7 +19,7 @@
         <v-tabs-items v-model="tab" class="mt-3 detail-tab">
           <v-tab-item key="1">
             <v-container>
-              <div class="mt-5" v-html="routeInfo.activityContent"></div>
+              <div class="mt-5" v-html="routeBaseInfo.activityContent"></div>
             </v-container>
           </v-tab-item>
           <v-tab-item key="2">
@@ -61,8 +61,7 @@
                               round
                               flat
                               color="primary"
-                              :disabled="(enrollInfo.groupId || baseInfo.registrationStartTime>now || baseInfo.registrationEndTime<now ||
-                            item.endTime<now)?true:false"
+                              :disabled="(baseInfo.registrationStartTime>now||baseInfo.registrationEndTime<now)?true:false"
                               :to="userInfo.device=='desktop'?'/enroll/'+$route.params.id+'/'+item.id:'/mobile/enroll/'+$route.params.id+'/'+item.id"
                             >报名</v-btn>
                             <v-btn
@@ -139,7 +138,7 @@ export default {
       routeInfo: {
         activityContent: ""
       },
-      baseInfo: [],
+      routeBaseInfo: [],
       groupList: [],
       titleImg: "",
       tab: null,
@@ -158,13 +157,13 @@ export default {
     close() {
       this.$router.push({ path: "/mobile/home" });
     },
-    getBaseInfo() {
-      this.baseInfo = this.routeList.find(element => {
+    getRouteBaseInfo() {
+      this.routeBaseInfo = this.routeList.find(element => {
         return element.id == this.$route.params.id;
       });
-      this.groupList = this.baseInfo.travelGroupList;
+      this.groupList = this.routeBaseInfo.travelGroupList;
       // console.log(this.groupList);
-      this.titleImg = "http://demo.chassstep.com" + this.baseInfo.imageUrl;
+      this.titleImg = "http://ghhd.ecnu.edu.cn/" + this.routeBaseInfo.imageUrl;
     },
     async getGroupMember(groupId) {
       this.loading = true;
@@ -189,17 +188,19 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(["routeList", "userInfo", "enrollInfo"])
+    ...mapGetters(["baseInfo", "routeList", "userInfo", "enrollInfo"])
   },
   mounted() {
     this.getRouteInfo();
-    this.getBaseInfo();
+    this.getRouteBaseInfo();
     this.now = new Date();
+    console.log(this.baseInfo.registrationEndTime);
+    console.log(this.baseInfo.registrationEndTime < this.now ? true : false);
   },
   beforeRouteUpdate(to, from, next) {
     next();
     this.getRouteInfo();
-    this.getBaseInfo();
+    this.getRouteBaseInfo();
   }
 };
 </script>
