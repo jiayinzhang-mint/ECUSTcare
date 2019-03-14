@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-toolbar app fixed>
+    <v-toolbar color="primary" dark app fixed>
       <v-toolbar-title class="pr-4">
         <span class="hidden-sm-and-down">疗休养</span>
       </v-toolbar-title>

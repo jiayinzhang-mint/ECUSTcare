@@ -57,7 +57,7 @@
 
 .route_list {
   height: calc(100vh - 64px);
-  overflow: auto
+  overflow: auto;
 }
 
 @keyframes fade {
