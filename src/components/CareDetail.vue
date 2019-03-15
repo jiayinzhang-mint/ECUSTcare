@@ -19,7 +19,7 @@
         <v-tabs-items v-model="tab" class="mt-3 detail-tab">
           <v-tab-item key="1">
             <v-container>
-              <div class="mt-5" v-html="routeBaseInfo.activityContent"></div>
+              <div class="mt-5" v-html="routeInfo.activityContent"></div>
             </v-container>
           </v-tab-item>
           <v-tab-item key="2">
