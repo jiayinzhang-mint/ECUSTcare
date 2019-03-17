@@ -2,7 +2,7 @@
   <v-layout fill-height>
     <v-flex xs12 sm4 class="route_list">
       <v-toolbar class="transparent" flat style="padding:0">
-        <v-btn class="mt-3" icon @click="backToLauncher">
+        <v-btn class="mt-3 hidden-sm-and-up" icon @click="backToLauncher">
           <v-icon>arrow_back</v-icon>
         </v-btn>
         <h1 class="headline font-weight-bold dim-title" style="margin-top:11px">{{year}} 疗养活动</h1>
@@ -46,7 +46,7 @@
                 <v-list-tile-avatar>
                   <v-icon>{{unionCheck[userInfo.unionPassed].icon}}</v-icon>
                 </v-list-tile-avatar>
-                <v-list-tile-content>
+                <v-list-tile-content class="text-xs-right">
                   <span>{{unionCheck[userInfo.unionPassed].text}}</span>
                 </v-list-tile-content>
               </v-list-tile>
@@ -56,7 +56,7 @@
                 <v-list-tile-avatar>
                   <v-icon>{{schoolCheck[userInfo.passed].icon}}</v-icon>
                 </v-list-tile-avatar>
-                <v-list-tile-content>
+                <v-list-tile-content class="text-xs-right">
                   <span>{{schoolCheck[userInfo.passed].text}}</span>
                 </v-list-tile-content>
               </v-list-tile>
@@ -66,7 +66,7 @@
                 <v-list-tile-avatar>
                   <v-icon>{{payCheck[userInfo.paymentCondition].icon}}</v-icon>
                 </v-list-tile-avatar>
-                <v-list-tile-content>
+                <v-list-tile-content class="text-xs-right">
                   <span>{{payCheck[userInfo.paymentCondition].text}}</span>
                 </v-list-tile-content>
               </v-list-tile>
@@ -84,27 +84,63 @@
           </v-card-title>
           <v-slide-y-transition>
             <v-list dense v-show="show">
-              <v-divider></v-divider>
               <v-list-tile>
                 <v-list-tile-title class="font-weight-bold">当前状态</v-list-tile-title>
-                <v-list-tile-title>{{currentPositionState.text}}</v-list-tile-title>
+                <v-spacer></v-spacer>
+                <v-list-tile-content>
+                  <span>{{currentPositionState.text}}</span>
+                </v-list-tile-content>
+                <v-list-tile-action>
+                  <v-icon v-if="currentPositionState.value==11">done</v-icon>
+                  <v-icon v-else>clear</v-icon>
+                </v-list-tile-action>
               </v-list-tile>
-              <v-divider></v-divider>
-
               <v-list-tile>
                 <v-list-tile-title class="font-weight-bold">工龄</v-list-tile-title>
                 <v-spacer></v-spacer>
                 <v-list-tile-content>
                   <span>{{userInfo.workingYears}}</span>
                 </v-list-tile-content>
+                <v-list-tile-action>
+                  <v-icon v-if="userInfo.workingYears>=5">done</v-icon>
+                  <v-icon v-else>clear</v-icon>
+                </v-list-tile-action>
               </v-list-tile>
               <v-list-tile>
                 <v-list-tile-title class="font-weight-bold">最近一次疗养</v-list-tile-title>
                 <v-spacer></v-spacer>
                 <v-list-tile-content>
-                  <span>{{userInfo.lastTravelYear}}</span>
+                  <span>{{userInfo.lastTravelYear?userInfo.lastTravelYear:'无'}}</span>
+                </v-list-tile-content>
+                <v-list-tile-action>
+                  <v-icon v-if="userInfo.lastTravelYear==null">clear</v-icon>
+                  <v-icon v-else-if="this.year-userInfo.lastTravelYear<4">clear</v-icon>
+                  <v-icon v-else>done</v-icon>
+                </v-list-tile-action>
+              </v-list-tile>
+              <v-divider></v-divider>
+              <v-list-tile>
+                <v-list-tile-title class="font-weight-bold">身份证</v-list-tile-title>
+                <v-spacer></v-spacer>
+                <v-list-tile-content class="text-xs-right" style="width:200px">
+                  <span class="text-xs-right">{{userInfo.sfzjh}}</span>
                 </v-list-tile-content>
               </v-list-tile>
+              <v-list-tile>
+                <v-list-tile-title class="font-weight-bold">性别</v-list-tile-title>
+                <v-spacer></v-spacer>
+                <v-list-tile-content class="text-xs-right" style="width:200px">
+                  <span>{{userInfo.sex==1?'男':'女'}}</span>
+                </v-list-tile-content>
+              </v-list-tile>
+              <v-list-tile>
+                <v-list-tile-title class="font-weight-bold">所在单位</v-list-tile-title>
+                <v-spacer></v-spacer>
+                <v-list-tile-content class="text-xs-right" style="width:200px">
+                  <span>{{userInfo.departmentName}}</span>
+                </v-list-tile-content>
+              </v-list-tile>
+
               <v-list-tile>
                 <v-list-tile-sub-title>
                   <small>请各位老师和对个人基本信息，如有异议，请联系校工会老师。</small>
@@ -360,6 +396,8 @@ export default {
     this.currentPositionState = this.positionState.find(e => {
       return e.value == this.userInfo.positionState;
     });
+
+    console.log(this.year - this.userInfo.lastTravelYear);
   }
 };
 </script>

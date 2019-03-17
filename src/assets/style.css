@@ -60,6 +60,10 @@
   overflow: auto;
 }
 
+.v-list__tile__content {
+  align-items: flex-end !important
+}
+
 @keyframes fade {
   from {
     color: rgba(39, 39, 39, 0);

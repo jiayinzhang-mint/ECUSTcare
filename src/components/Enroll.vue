@@ -51,7 +51,7 @@
           <v-text-field label="工作单位" :value="userInfo.departmentName" disabled></v-text-field>
         </v-form>
         <v-checkbox color="primary" v-model="agree" label="以上信息准确无误"></v-checkbox>
-        <a href="http://ghhd.ecnu.edu.cn/sys/user/profile">信息有误？</a>
+        <small>请各位老师和对个人基本信息，如有异议，请联系校工会老师。</small>
         <v-layout justify-center>
           <v-flex xs12 sm6>
             <v-btn

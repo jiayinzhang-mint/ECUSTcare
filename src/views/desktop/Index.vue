@@ -1,23 +1,16 @@
 <template>
   <div>
-    <v-toolbar color="primary" dark app fixed>
-      <v-toolbar-title class="pr-4">
+    <v-toolbar color="primary lighten-1" dark app fixed>
+      <v-btn icon @click="goBack">
+        <v-icon>arrow_back</v-icon>
+      </v-btn>
+      <v-toolbar-title class="pr-4" style="margin-left:0">
         <span class="hidden-sm-and-down">疗休养</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-menu offset-y left>
-        <v-btn slot="activator" flat>
-          <v-avatar size="32px" tile>{{userInfo.username}}</v-avatar>
-        </v-btn>
-        <v-list>
-          <v-list-tile v-for="(item, index) in userMenu" :key="index" :to="item.route">
-            <v-list-tile-avatar>
-              <v-icon>{{item.icon}}</v-icon>
-            </v-list-tile-avatar>
-            <v-list-tile-title>{{ item.title }}</v-list-tile-title>
-          </v-list-tile>
-        </v-list>
-      </v-menu>
+      <v-toolbar-items>
+        <v-btn flat>{{userInfo.username}} {{userInfo.trueName}}</v-btn>
+      </v-toolbar-items>
     </v-toolbar>
     <div>
       <router-view></router-view>
@@ -39,6 +32,11 @@ export default {
         }
       ]
     };
+  },
+  methods: {
+    goBack() {
+      window.location.href = "http://ghhd.ecnu.edu.cn";
+    }
   },
   computed: {
     ...mapGetters(["userInfo"])
