@@ -2,7 +2,6 @@ const CompressionWebpackPlugin = require("compression-webpack-plugin");
 const productionGzipExtensions = ["js", "css"];
 //proxy
 module.exports = {
-  
   configureWebpack: config => {
     if (process.env.NODE_ENV === "production") {
       //terser

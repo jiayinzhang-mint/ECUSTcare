@@ -61,7 +61,7 @@
                               round
                               flat
                               color="primary"
-                              :disabled="(baseInfo.registrationStartTime>now||baseInfo.registrationEndTime<now)?true:false"
+                              :disabled="(baseInfo.registrationStartTime>now||baseInfo.registrationEndTime<now||userInfo.travalable==false)?true:false"
                               :to="userInfo.device=='desktop'?'/enroll/'+$route.params.id+'/'+item.id:'/mobile/enroll/'+$route.params.id+'/'+item.id"
                             >报名</v-btn>
                             <v-btn
@@ -196,6 +196,7 @@ export default {
     this.now = new Date();
     console.log(this.baseInfo.registrationEndTime);
     console.log(this.baseInfo.registrationEndTime < this.now ? true : false);
+    console.log(this.userInfo.travelable);
   },
   beforeRouteUpdate(to, from, next) {
     next();

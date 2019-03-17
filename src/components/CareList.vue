@@ -74,8 +74,44 @@
           </v-slide-y-transition>
         </v-card>
 
-        <v-card class="mb-3" v-else>
-          <v-card-title class="font-weight-medium">当前状态: {{userInfo.travelable?"可报名":"不可报名"}}</v-card-title>
+        <v-card dark class="mb-3" color="primary lighten-1" v-else>
+          <v-card-title class="font-weight-medium">
+            当前状态: {{userInfo.travelable?"您符合今年报名资格":"您不符合今年报名资格"}}
+            <v-spacer></v-spacer>
+            <v-btn icon @click="show = !show">
+              <v-icon>{{ show ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}</v-icon>
+            </v-btn>
+          </v-card-title>
+          <v-slide-y-transition>
+            <v-list dense v-show="show">
+              <v-divider></v-divider>
+              <v-list-tile>
+                <v-list-tile-title class="font-weight-bold">当前状态</v-list-tile-title>
+                <v-list-tile-title>{{currentPositionState.text}}</v-list-tile-title>
+              </v-list-tile>
+              <v-divider></v-divider>
+
+              <v-list-tile>
+                <v-list-tile-title class="font-weight-bold">工龄</v-list-tile-title>
+                <v-spacer></v-spacer>
+                <v-list-tile-content>
+                  <span>{{userInfo.workingYears}}</span>
+                </v-list-tile-content>
+              </v-list-tile>
+              <v-list-tile>
+                <v-list-tile-title class="font-weight-bold">最近一次疗养</v-list-tile-title>
+                <v-spacer></v-spacer>
+                <v-list-tile-content>
+                  <span>{{userInfo.lastTravelYear}}</span>
+                </v-list-tile-content>
+              </v-list-tile>
+              <v-list-tile>
+                <v-list-tile-sub-title>
+                  <small>请各位老师和对个人基本信息，如有异议，请联系校工会老师。</small>
+                </v-list-tile-sub-title>
+              </v-list-tile>
+            </v-list>
+          </v-slide-y-transition>
         </v-card>
 
         <h2 class="mb-3 mt-5 subheading font-weight-bold">疗养线路</h2>
@@ -126,6 +162,7 @@
                         flat
                         round
                         color="primary"
+                        :disabled="userInfo.travelable==false"
                         :to="userInfo.device=='desktop'?'/route/'+item.id:'/mobile/route/'+item.id"
                         class="hidden-sm-and-down"
                       >我要报名</v-btn>
@@ -218,6 +255,45 @@ export default {
           icon: "check"
         }
       ],
+      positionState: [
+        {
+          value: "11",
+          text: "在岗"
+        },
+        {
+          value: "2",
+          text: "离岗"
+        },
+        {
+          value: "3",
+          text: "离校"
+        },
+        {
+          value: "4",
+          text: "离退休"
+        },
+        {
+          value: "5",
+          text: "提前退休"
+        },
+        {
+          value: "6",
+          text: "待岗"
+        },
+        {
+          value: "10",
+          text: "年度退休"
+        },
+        {
+          value: "40",
+          text: "零食在岗"
+        },
+        {
+          value: "99",
+          text: "特殊人员"
+        }
+      ],
+      currentPositionState: {},
       now: null,
       close: false
     };
@@ -227,6 +303,9 @@ export default {
       this.loading = true;
       authService.getUserInfo();
       await careService.getRouteList(this.year);
+      this.currentPositionState = this.positionState.find(e => {
+        return e.value == this.userInfo.positionState;
+      });
       this.loading = false;
     },
     async getCurrentGroup() {
@@ -278,6 +357,9 @@ export default {
     if (this.baseInfo.registrationEndTime < now) {
       this.close = true;
     }
+    this.currentPositionState = this.positionState.find(e => {
+      return e.value == this.userInfo.positionState;
+    });
   }
 };
 </script>
