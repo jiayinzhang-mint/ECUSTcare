@@ -22,9 +22,9 @@ class AuthService {
   }
 
   static async getUserInfo() {
-    // var rsp = await basicService.getRequest("/api/travel/pc/userInfo");
+    var rsp = await basicService.getRequest("/api/travel/pc/userInfo");
     const device = detectDevice();
-    console.log(rsp.code);
+    // console.log(rsp.code);
 
     if (rsp.code == 403) {
       if (device == "desktop") {
