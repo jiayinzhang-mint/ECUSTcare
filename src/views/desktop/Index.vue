@@ -43,7 +43,7 @@ export default {
   },
   async mounted() {
     const data = await this.$ajax.get("/api/travel/pc/routeList");
-    console.log(data);
+    // console.log(data);
   }
 };
 </script>
