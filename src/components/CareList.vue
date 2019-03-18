@@ -17,16 +17,7 @@
           <v-card-title class="font-weight-bold">
             {{currentRoute.routeName}} - {{currentGroup.groupName}}
             <v-spacer></v-spacer>
-            <v-btn
-              flat
-              round
-              dark
-              small
-              icon
-              :to="userInfo.device=='desktop'?'/route/'+currentRoute.id:'/mobile/route/'+currentRoute.id"
-            >
-              <v-icon>info</v-icon>
-            </v-btn>
+
             <v-btn icon @click="show = !show">
               <v-icon>{{ show ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}</v-icon>
             </v-btn>
@@ -69,6 +60,11 @@
                 <v-list-tile-content class="text-xs-right">
                   <span>{{payCheck[userInfo.paymentCondition].text}}</span>
                 </v-list-tile-content>
+              </v-list-tile>
+              <v-list-tile
+                :to="userInfo.device=='desktop'?'/route/'+currentRoute.id:'/mobile/route/'+currentRoute.id"
+              >
+                <v-list-tile-title>查看线路详情</v-list-tile-title>
               </v-list-tile>
             </v-list>
           </v-slide-y-transition>
@@ -113,8 +109,7 @@
                   <span>{{userInfo.lastTravelYear?userInfo.lastTravelYear:'无'}}</span>
                 </v-list-tile-content>
                 <v-list-tile-action>
-                  <v-icon v-if="userInfo.lastTravelYear==null">clear</v-icon>
-                  <v-icon v-else-if="this.year-userInfo.lastTravelYear<4">clear</v-icon>
+                  <v-icon v-if="this.year-userInfo.lastTravelYear<4">clear</v-icon>
                   <v-icon v-else>done</v-icon>
                 </v-list-tile-action>
               </v-list-tile>
@@ -143,7 +138,7 @@
 
               <v-list-tile>
                 <v-list-tile-sub-title>
-                  <small>请各位老师和对个人基本信息，如有异议，请联系校工会老师。</small>
+                  <small>请核对个人基本信息，如有异议，请联系校工会老师。</small>
                 </v-list-tile-sub-title>
               </v-list-tile>
             </v-list>
