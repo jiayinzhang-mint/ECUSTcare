@@ -61,7 +61,7 @@
                               round
                               flat
                               color="primary"
-                              :disabled="(baseInfo.registrationStartTime>now||baseInfo.registrationEndTime<now||userInfo.travalable==false)?true:false"
+                              :disabled="(baseInfo.registrationStartTime>now||baseInfo.registrationEndTime<now||userInfo.travalable==false||enrollInfo.groupId)?true:false"
                               :to="userInfo.device=='desktop'?'/enroll/'+$route.params.id+'/'+item.id:'/mobile/enroll/'+$route.params.id+'/'+item.id"
                             >报名</v-btn>
                             <v-btn
