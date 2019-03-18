@@ -157,11 +157,7 @@ export default {
         if (rsp.message == "报名成功") {
           this.$emit("enroll");
         }
-        if (this.userInfo.device == "desktop") {
-          this.$router.push({ path: "/home" });
-        } else {
-          this.$router.push({ path: "/mobile/home" });
-        }
+        window.location.href = "http://ghhd.ecnu.edu.cn/care";
       }
     }
   },
