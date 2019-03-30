@@ -98,7 +98,8 @@
 
     <v-dialog v-model="enrollListDialog" scrollable max-width="600px">
       <v-card>
-        <v-card-title class="subheading font-weight-bold">已报名人员
+        <v-card-title class="subheading font-weight-bold">
+          已报名人员
           <v-spacer></v-spacer>
           <v-btn icon @click="enrollListDialog=false">
             <v-icon>clear</v-icon>
@@ -138,7 +139,7 @@ export default {
       routeInfo: {
         activityContent: ""
       },
-      routeBaseInfo: [],
+      routeBaseInfo: {},
       groupList: [],
       titleImg: "",
       tab: null,
@@ -158,12 +159,20 @@ export default {
       this.$router.push({ path: "/mobile/home" });
     },
     getRouteBaseInfo() {
-      this.routeBaseInfo = this.routeList.find(element => {
-        return element.id == this.$route.params.id;
-      });
-      this.groupList = this.routeBaseInfo.travelGroupList;
-      // console.log(this.groupList);
-      this.titleImg = "http://ghhd.ecnu.edu.cn/" + this.routeBaseInfo.imageUrl;
+      this.groupList = {};
+      // this.routeBaseInfo = this.routeList.find(element => {
+      //   return element.id == this.$route.params.id;
+      // });
+      for (let i = 0; i < this.routeList.length; i++) {
+        if (this.routeList[i].id == this.$route.params.id) {
+          this.routeBaseInfo = this.routeList[i];
+          console.log(this.routeBaseInfo);
+          this.groupList = this.routeList[i].travelGroupList;
+          console.log(this.groupList);
+          this.titleImg =
+            "http://ghhd.ecnu.edu.cn/" + this.routeList[i].imageUrl;
+        }
+      }
     },
     async getGroupMember(groupId) {
       this.loading = true;
@@ -201,7 +210,10 @@ export default {
   beforeRouteUpdate(to, from, next) {
     next();
     this.getRouteInfo();
-    this.getRouteBaseInfo();
+    this.groupList = {};
+    setTimeout(() => {
+      this.getRouteBaseInfo();
+    }, 50);
   }
 };
 </script>
