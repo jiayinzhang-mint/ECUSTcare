@@ -317,7 +317,7 @@ export default {
         },
         {
           value: "40",
-          text: "零食在岗"
+          text: "临时在岗"
         },
         {
           value: "99",
