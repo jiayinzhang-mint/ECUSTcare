@@ -3,16 +3,16 @@
 }
 
 .v-card.v-card--flat {
-  box-shadow: none !important
+  box-shadow: none !important;
 }
 
 .theme--dark.v-list {
-  background: transparent !important
+  background: transparent !important;
 }
 
 .v-dialog {
   border-radius: 7px !important;
-  margin: 10px !important
+  margin: 10px !important;
 }
 
 .v-list__tile__avatar {
@@ -21,38 +21,39 @@
 
 .v-list__tile__content {
   min-width: 70px;
-  padding-left: 5px
+  padding-left: 5px;
 }
 
 .v-card__title {
-  padding: 12px 16px !important
+  padding: 12px 16px !important;
 }
 
 .v-tabs__item.v-tabs__item--active {
-  color: #f4511e !important
+  color: #f4511e !important;
 }
 
 .fade-enter-active {
-  animation: fade 0.5s
+  animation: fade 0.5s;
 }
 
 .card-enter {
-  animation: card 0.4s
+  animation: card 0.4s;
 }
 
 .v-toolbar {
-  box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.1), 0px 4px 5px 0px rgba(0, 0, 0, 0.02), 0px 1px 10px 0px rgba(0, 0, 0, 0.1) !important
+  box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.1),
+    0px 4px 5px 0px rgba(0, 0, 0, 0.02), 0px 1px 10px 0px rgba(0, 0, 0, 0.1) !important;
 }
 
 .v-toolbar.elevation-0 {
-  box-shadow: none !important
+  box-shadow: none !important;
 }
 
 .count-down {
   background-color: rgb(112, 112, 112);
   color: white;
   padding: 1px 4px;
-  border-radius: 5px
+  border-radius: 5px;
 }
 
 .route_list {
@@ -61,7 +62,13 @@
 }
 
 .v-list__tile__content {
-  align-items: flex-end !important
+  align-items: flex-end !important;
+}
+
+.theme--light.v-input--is-disabled .v-label,
+.theme--light.v-input--is-disabled input,
+.theme--light.v-input--is-disabled textarea {
+  color: rgb(0, 0, 0, 0.6) !important;
 }
 
 @keyframes fade {
@@ -76,38 +83,38 @@
 @keyframes card {
   from {
     opacity: 0;
-    transform: translateY(10px)
+    transform: translateY(10px);
   }
   to {
     opacity: 1;
-    transform: translateX(0px)
+    transform: translateX(0px);
   }
 }
 
 .detail-tab {
   height: calc(100vh - 212px);
-  overflow: auto
+  overflow: auto;
 }
 
 .v-stepper__items {
   height: calc(100vh - 136px);
-  overflow: auto !important
+  overflow: auto !important;
 }
 
 @media only screen and (max-width: 959px) {
   .dim-title {
-    margin-left: -px !important
+    margin-left: -px !important;
   }
   .detail-tab {
     height: calc(100vh - 122px);
-    overflow: auto
+    overflow: auto;
   }
   .v-stepper__items {
     height: calc(100vh - 72px);
-    overflow: auto !important
+    overflow: auto !important;
   }
   .route_list {
     height: calc(100vh);
-    overflow: auto
+    overflow: auto;
   }
 }

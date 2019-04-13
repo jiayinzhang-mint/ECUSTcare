@@ -68,7 +68,7 @@
                               @click="cancel"
                               round
                               flat
-                              :disabled="userInfo.passed==1?true:false"
+                              :disabled="(userInfo.passed==1||userInfo.passed==2 || userInfo.unionPassed==1||userInfo.unionPassed==2)?true:false"
                               v-if="enrollInfo.groupId == item.id "
                             >取消报名</v-btn>
 
