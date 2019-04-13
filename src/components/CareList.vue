@@ -74,7 +74,7 @@
           <v-card-title class="font-weight-medium">
             当前状态: {{userInfo.travelable?"您符合今年报名资格":"您不符合今年报名资格"}}
             <v-spacer></v-spacer>
-            <v-btn icon @click="show = !show">
+            <v-btn v-if="userInfo.travelable" icon @click="show = !show">
               <v-icon>{{ show ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}</v-icon>
             </v-btn>
           </v-card-title>
@@ -117,21 +117,21 @@
               <v-list-tile>
                 <v-list-tile-title class="font-weight-bold">身份证</v-list-tile-title>
                 <v-spacer></v-spacer>
-                <v-list-tile-content class="text-xs-right" style="width:200px">
+                <v-list-tile-content class="text-xs-right" style="width:220px">
                   <span class="text-xs-right">{{userInfo.sfzjh}}</span>
                 </v-list-tile-content>
               </v-list-tile>
               <v-list-tile>
                 <v-list-tile-title class="font-weight-bold">性别</v-list-tile-title>
                 <v-spacer></v-spacer>
-                <v-list-tile-content class="text-xs-right" style="width:200px">
+                <v-list-tile-content class="text-xs-right" style="width:220px">
                   <span>{{userInfo.sex==1?'男':'女'}}</span>
                 </v-list-tile-content>
               </v-list-tile>
               <v-list-tile>
                 <v-list-tile-title class="font-weight-bold">所在单位</v-list-tile-title>
                 <v-spacer></v-spacer>
-                <v-list-tile-content class="text-xs-right" style="width:200px">
+                <v-list-tile-content class="text-xs-right" style="width:220px">
                   <span>{{userInfo.departmentName}}</span>
                 </v-list-tile-content>
               </v-list-tile>
@@ -148,7 +148,8 @@
         <h2 class="mb-3 mt-5 subheading font-weight-bold">疗养线路</h2>
 
         <v-card class="mb-3">
-          <v-card-title class="font-weight-bold">报名时间段
+          <v-card-title class="font-weight-bold">
+            报名时间段
             <v-spacer></v-spacer>
             <div>{{baseInfo.registrationStartTime | moment("YYYY-MM-DD")}} 至 {{baseInfo.registrationEndTime | moment("YYYY-MM-DD")}}</div>
           </v-card-title>
@@ -163,7 +164,11 @@
             </div>
           </v-card-title>
         </v-card>
-        <transition-group appear appear-active-class="card-enter" v-if="!userInfo.ended || !close">
+        <transition-group
+          appear
+          appear-active-class="card-enter"
+          v-if="!baseInfo.ended && !baseInfo.temporaryClosed"
+        >
           <template v-for="(item,i) in routeList">
             <v-layout row :key="i" class="mb-3">
               <v-flex xs12>
@@ -207,7 +212,8 @@
 
         <v-dialog v-model="loading" hide-overlay persistent width="300">
           <v-card color="primary" dark>
-            <v-card-text>请稍后
+            <v-card-text>
+              请稍后
               <v-progress-linear indeterminate color="white" class="mb-0"></v-progress-linear>
             </v-card-text>
           </v-card>
@@ -392,7 +398,7 @@ export default {
       return e.value == this.userInfo.positionState;
     });
 
-    console.log(this.year - this.userInfo.lastTravelYear);
+    console.log(this.baseInfo.ended);
   }
 };
 </script>
