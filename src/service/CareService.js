@@ -36,6 +36,7 @@ class careService {
     const rsp = await basicService.postRequest("/api/travel-applicant/pc", {
       username: store.getters.userInfo.username,
       groupId: groupId,
+      job: fillInfo.job,
       physicalState: fillInfo.physicalState,
       emergencyContact: fillInfo.emergencyContact,
       homeTelephone: fillInfo.homeTelephone,

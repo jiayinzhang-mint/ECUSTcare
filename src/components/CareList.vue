@@ -61,10 +61,8 @@
                   <span>{{payCheck[userInfo.paymentCondition].text}}</span>
                 </v-list-tile-content>
               </v-list-tile>
-              <v-list-tile
-                :to="userInfo.device=='desktop'?'/route/'+currentRoute.id:'/mobile/route/'+currentRoute.id"
-              >
-                <v-list-tile-title>查看线路详情</v-list-tile-title>
+              <v-list-tile @click="showDetail(currentRoute.id)">
+                <v-list-tile-title class="font-weight-bold">查看线路详情</v-list-tile-title>
               </v-list-tile>
             </v-list>
           </v-slide-y-transition>
@@ -378,6 +376,14 @@ export default {
     },
     backToLauncher() {
       window.location.href = "http://ghhd.ecnu.edu.cn/wx/home";
+    },
+    showDetail(id) {
+      this.$router.push({
+        path:
+          this.userInfo.device == "desktop"
+            ? "/route/" + id
+            : "/mobile/route/" + id
+      });
     }
   },
   computed: {
