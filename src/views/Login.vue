@@ -13,7 +13,7 @@ export default {
   data() {
     return {
       username: "admin",
-      password: "123456",
+      password: "hsdgh2019!",
       loading: false
     };
   },
@@ -21,7 +21,7 @@ export default {
     async login() {
       this.$loading.show(true);
       try {
-        // var data = await authService.login(this.username, this.password);
+        var data = await authService.login(this.username, this.password);
         await authService.getUserInfo();
         await careService.getRouteList();
         await careService.getBaseInfo();
