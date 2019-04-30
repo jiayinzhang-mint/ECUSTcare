@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import basicService from "./BasicService";
 import store from "../store";
 import message from "../utils/message";
@@ -12,8 +13,6 @@ class careService {
   }
 
   static async getRouteList() {
-    var today = new Date();
-    var year = today.getFullYear();
     const rsp = await basicService.getRequest("/api/travel/pc/routeList");
     await store.dispatch("getRouteList", rsp.list);
     return rsp;

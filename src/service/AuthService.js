@@ -1,9 +1,9 @@
+/* eslint-disable no-console */
 import basicService from "./BasicService";
 import detectDevice from "../utils/device";
 import message from "../utils/message";
 import store from "../store";
 import qs from "qs";
-import Vue from "vue";
 
 class AuthService {
   static async login(username, password) {
