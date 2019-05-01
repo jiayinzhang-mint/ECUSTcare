@@ -70,7 +70,7 @@
 
         <v-card dark class="mb-3" color="primary lighten-1" v-else>
           <v-card-title class="font-weight-medium">
-            {{userInfo.trueName}}老师, {{userInfo.travelable?"欢迎您报名参加今年的疗休养":"您不符合今年报名资格"}}
+            {{userInfo.trueName}}老师, {{userInfo.travelable?"欢迎您报名参加今年的疗休养":"您不符合今年报名条件"}}
             <v-spacer></v-spacer>
             <v-btn icon @click="show = !show">
               <v-icon>{{ show ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}</v-icon>
