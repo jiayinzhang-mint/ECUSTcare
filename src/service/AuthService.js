@@ -28,9 +28,9 @@ class AuthService {
 
     if (rsp.code == 403) {
       if (device == "desktop") {
-        window.location.href = "http://ghhd.ecnu.edu.cn/pc/login";
+        window.location.href = "http://ghwx.ecust.edu.cn/pc/login";
       } else {
-        window.location.href = "http://ghhd.ecnu.edu.cn/wechat/index";
+        window.location.href = "http://ghwx.ecust.edu.cn/wx/home";
       }
     }
     var userInfo = rsp;

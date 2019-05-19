@@ -22,7 +22,7 @@
 
       <v-stepper-items>
         <v-stepper-content step="1">
-          <div class="subheading font-weight-bold mb-3">报名须知</div>
+          <div class="subheading font-weight-bold mb-3">承诺书</div>
           <div class="ql-editor" v-html="baseInfo.notification"></div>
           <div>
             <v-checkbox color="primary" v-model="agree" label="我已仔细阅读并同意本协议"></v-checkbox>
@@ -94,17 +94,17 @@
               v-model="fillInfo.homeTelephone"
               :rules="[v => !!v || '必填项']"
             ></v-text-field>
-            <v-text-field
+            <!-- <v-text-field
               label="职称 / 职务"
               required
               v-model="fillInfo.job"
               :rules="[v => !!v || '必填项']"
-            ></v-text-field>
+            ></v-text-field> -->
             <v-radio-group label="出发地点" v-model="fillInfo.campus" row :rules="[v => !!v || '必填项']">
-              <v-radio label="闵行校区" value="0"></v-radio>
-              <v-radio label="中北校区" value="1"></v-radio>
+              <v-radio label="徐汇校区" value="0"></v-radio>
+              <v-radio label="奉贤校区" value="1"></v-radio>
             </v-radio-group>
-            <v-radio-group
+            <!-- <v-radio-group
               label="接受调剂"
               v-model="fillInfo.acceptAdjustment"
               row
@@ -112,8 +112,8 @@
             >
               <v-radio label="接受" value="true"></v-radio>
               <v-radio label="不接受" value="false"></v-radio>
-            </v-radio-group>
-            <v-textarea v-model="fillInfo.comment" counter="50" label="备注"></v-textarea>
+            </v-radio-group> -->
+            <v-textarea v-model="fillInfo.comment" counter="50" label="备注" placeholder="是否有医生提供的重大疾病的病史，或慢性病与心血管病情况。"></v-textarea>
             <v-checkbox color="primary" v-model="agree" label="确认信息填写准确无误"></v-checkbox>
           </v-form>
           <v-layout justify-center>

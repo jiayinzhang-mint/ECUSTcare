@@ -9,8 +9,8 @@ import "../components/loading/index";
 
 Vue.use(Vuetify, {
   theme: {
-    primary: colors.deepOrange.darken1,
-    accent: colors.deepOrange.darken1
+    primary: colors.blue.darken1,
+    accent: colors.blue.darken1
   },
   iconfont: "md"
 });
