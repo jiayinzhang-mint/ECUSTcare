@@ -375,7 +375,7 @@ export default {
       }, 1000);
     },
     backToLauncher() {
-      window.location.href = "http://ghhd.ecnu.edu.cn/wx/home";
+      window.location.href = "http://ghwx.ecust.edu.cn/wx/home";
     },
     showDetail(id) {
       this.$router.push({

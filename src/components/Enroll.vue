@@ -174,7 +174,7 @@ export default {
     },
     redirect() {
       this.successDialog = false;
-      window.location.href = "http://ghhd.ecnu.edu.cn/care";
+      window.location.href = "http://ghwx.ecust.edu.cn/care";
     }
   },
   computed: {

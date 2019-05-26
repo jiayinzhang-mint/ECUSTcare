@@ -170,7 +170,7 @@ export default {
           this.groupList = this.routeList[i].travelGroupList;
           console.log(this.groupList);
           this.titleImg =
-            "http://ghhd.ecnu.edu.cn/" + this.routeList[i].imageUrl;
+            "http://ghwx.ecust.edu.cn/" + this.routeList[i].imageUrl;
         }
       }
     },
