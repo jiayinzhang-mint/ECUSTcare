@@ -1,3 +1,3 @@
-const picUrl = "http://ghhd.ecnu.edu.cn";
+const picUrl = "http://ghwx.ecust.edu.cn";
 
 export default picUrl;

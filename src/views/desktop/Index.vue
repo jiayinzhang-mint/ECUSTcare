@@ -35,7 +35,7 @@ export default {
   },
   methods: {
     goBack() {
-      window.location.href = "http://ghhd.ecnu.edu.cn";
+      window.location.href = "http://ghwx.ecust.edu.cn/wx/home";
     }
   },
   computed: {
