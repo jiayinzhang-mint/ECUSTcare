@@ -10,7 +10,7 @@
           <v-spacer></v-spacer>
           <h2 class="font-weight-bold">¥ {{routeBaseInfo.routePrice}}</h2>
         </v-toolbar>
-        <v-tabs v-model="tab" centered color="transparent" slider-color="yellow">
+        <v-tabs v-model="tab" centered color="transparent">
           <v-tabs-slider></v-tabs-slider>
           <v-tab key="1">线路简介</v-tab>
           <v-tab key="2">疗休养团</v-tab>
@@ -37,7 +37,7 @@
                               <span class="body-2 hidden-sm-and-up">
                                 {{item.minNumber}} - {{item.maxNumber}} 人 &nbsp;
                                 <span
-                                  style="color:#f4511e"
+                                  style="color:#1976D2"
                                 >剩余 {{item.maxNumber-item.applicantNumber}}</span>
                               </span>
                               <br>
@@ -50,7 +50,7 @@
                               <span class="body-2">
                                 {{item.minNumber}} - {{item.maxNumber}} 人 &nbsp;
                                 <span
-                                  style="color:#f4511e"
+                                  style="color:#1976D2"
                                 >剩余 {{item.maxNumber-item.applicantNumber}}</span>
                               </span>
                             </div>

@@ -2,7 +2,7 @@
   <div>
     <v-stepper v-model="e1">
       <v-stepper-header>
-        <v-stepper-step :complete="e1 > 1" step="1">报名须知</v-stepper-step>
+        <v-stepper-step :complete="e1 > 1" step="1">报名承诺</v-stepper-step>
 
         <v-divider></v-divider>
 
@@ -102,7 +102,7 @@
             ></v-text-field>-->
             <v-radio-group label="出发地点" v-model="fillInfo.campus" row :rules="[v => !!v || '必填项']">
               <v-radio label="徐汇校区" value="0"></v-radio>
-              <v-radio label="奉贤校区" value="1"></v-radio>
+              <!-- <v-radio label="奉贤校区" value="1"></v-radio> -->
             </v-radio-group>
             <!-- <v-radio-group
               label="接受调剂"
