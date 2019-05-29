@@ -133,7 +133,13 @@
                   <span>{{userInfo.departmentName}}</span>
                 </v-list-tile-content>
               </v-list-tile>
-
+              <v-list-tile>
+                <v-list-tile-title class="font-weight-bold">手机号码</v-list-tile-title>
+                <v-spacer></v-spacer>
+                <v-list-tile-content class="text-xs-right" style="width:220px">
+                  <span>{{userInfo.phone}}</span>
+                </v-list-tile-content>
+              </v-list-tile>
               <v-list-tile>
                 <v-list-tile-sub-title>
                   <small>请核对个人基本信息，如有异议，请联系校工会老师。</small>
