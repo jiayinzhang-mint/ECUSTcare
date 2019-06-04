@@ -90,7 +90,7 @@
                 </v-list-tile-action>
               </v-list-tile>
               <v-list-tile>
-                <v-list-tile-title class="font-weight-bold">工龄</v-list-tile-title>
+                <v-list-tile-title class="font-weight-bold">来校工作年限</v-list-tile-title>
                 <v-spacer></v-spacer>
                 <v-list-tile-content>
                   <span>{{userInfo.workingYears}}</span>
